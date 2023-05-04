@@ -21,7 +21,7 @@ export default MakeswiftApiHandler(process.env.MAKESWIFT_SITE_API_KEY!, {
           {
             weight: "700",
             style: "normal",
-            src: "/fonts/NeueHaasDisplay-Bold.woff2",
+            src: "/fonts/NeueHaasDisplay-Mediu.woff2",
           },
         ],
       },
