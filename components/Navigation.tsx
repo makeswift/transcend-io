@@ -159,7 +159,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                         <li className="uppercase text-[#535f6e] px-6 pt-6 pb-2 font-bold text-[10px] tracking-widest">
                           {subnavGroup.heading}
                         </li>
-                        {subnavGroup?.subnavLinks.map((subnavLink, i) => (
+                        {subnavGroup.subnavLinks.map((subnavLink, i) => (
                           <li key={i}>
                             <NavigationMenu.Link asChild>
                               <a
@@ -168,7 +168,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                               >
                                 {subnavLink.icon && (
                                   <Image
-                                    src={subnavLink?.icon.url}
+                                    src={subnavLink.icon.url}
                                     alt="Icon"
                                     width={24}
                                     height={24}
