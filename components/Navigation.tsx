@@ -86,13 +86,13 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
         ref={stickyRef}
         className={clsx(
           className,
-          `fixed flex flex-col inset-x-0 top-0 z-20 transition-colors ${
+          `fixed flex flex-col inset-x-0 top-0 z-20 px-5 md:px-8 lg:px-12 transition-colors ${
             sticky ? "bg-white shadow-md" : ""
           } ${mobileNavOpen ? "min-h-0 inset-y-0 h-full" : ""}`
         )}
       >
         <nav
-          className={`mx-auto flex h-[70px] w-full max-w-[1200px] items-center px-5 md:px-8 lg:px-12 justify-between lg:justify-start ${
+          className={`mx-auto flex h-[70px] w-full max-w-[1200px] items-center justify-between lg:justify-start ${
             sticky ? "text-[#2b292d]" : "text-white"
           }`}
         >
