@@ -16,6 +16,7 @@ import {
 } from "@makeswift/runtime/controls";
 import { Marquee } from "../../components/Marquee";
 import { Navigation } from "../../components/Navigation";
+import { Carousel } from "../../components/Carousel";
 
 // Register your components here!
 
@@ -115,5 +116,59 @@ ReactRuntime.registerComponent(Navigation, {
       selectAll: true,
     }),
     ctaLink: Link({ label: "CTA on click" }),
+  },
+});
+
+ReactRuntime.registerComponent(Carousel, {
+  type: "carousel",
+  label: "Carousel",
+  props: {
+    slides: List({
+      label: "Slides",
+      type: Shape({
+        type: {
+          logo: Image({
+            label: "Logo",
+            format: Image.Format.WithDimensions,
+          }),
+          logoAlt: TextInput({
+            label: "Alt text",
+            defaultValue: "Logo",
+            selectAll: true,
+          }),
+          slideColor: TextInput({
+            label: "Logo BG color (Hex)",
+            defaultValue: "#eeeeee",
+            selectAll: true,
+          }),
+          quote: TextArea({
+            label: "Quote",
+            defaultValue: `"At Robinhood, we empower our customers to take greater ownership of their financial future, and we believe this extends to their personal information. Transcend's data privacy infrastructure helps facilitate the way we give our customers control over their data."`,
+            selectAll: true,
+          }),
+          author: TextInput({
+            label: "Quote author name",
+            defaultValue: "John Smith",
+            selectAll: true,
+          }),
+          authorTitle: TextInput({
+            label: "Quote author title",
+            defaultValue: "CEO, Apple",
+            selectAll: true,
+          }),
+        },
+      }),
+      getItemLabel(slide) {
+        return slide?.logoAlt || "Logo";
+      },
+    }),
+    className: Style(),
+    autoplay: Number({
+      label: "Autoplay",
+      defaultValue: 0,
+      step: 0.1,
+      suffix: "s",
+      selectAll: true,
+    }),
   },
 });

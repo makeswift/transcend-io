@@ -86,11 +86,9 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
         ref={stickyRef}
         className={clsx(
           className,
-          `fixed inset-x-0 top-0 z-20 transition-colors ${
+          `fixed flex flex-col inset-x-0 top-0 z-20 transition-colors ${
             sticky ? "bg-white shadow-md" : ""
-          } ${mobileNavOpen ? "min-h-0 inset-0" : ""} ${
-            sticky && mobileNavOpen ? "h-full" : ""
-          }`
+          } ${mobileNavOpen ? "min-h-0 inset-y-0 h-full" : ""}`
         )}
       >
         <nav
@@ -153,7 +151,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                     forceMount
                     className="data-[state=open]:opacity-100 data-[state=closed]:opacity-0 absolute top-full -left-16 w-full sm:w-auto flex bg-white rounded-xl shadow-md transition-opacity overflow-hidden"
                   >
-                    {link.subnavGroups?.map((subnavGroup, i) => (
+                    {link.subnavGroups.map((subnavGroup, i) => (
                       <ul
                         key={i}
                         className="w-[280px] border-r border-[#f4f4f4]"
@@ -161,7 +159,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                         <li className="uppercase text-[#535f6e] px-6 pt-6 pb-2 font-bold text-[10px] tracking-widest">
                           {subnavGroup.heading}
                         </li>
-                        {subnavGroup.subnavLinks?.map((subnavLink, i) => (
+                        {subnavGroup.subnavLinks.map((subnavLink, i) => (
                           <li key={i}>
                             <NavigationMenu.Link asChild>
                               <a
@@ -242,7 +240,6 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
             <svg
               viewBox="0 0 26 24"
               fill="none"
-              stroke="inherit"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
@@ -257,55 +254,110 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
           </button>
         </nav>
 
-        {/* <nav
-          className={`flex-1 flex-col bg-white overflow-auto ${
+        <nav
+          className={`flex-1 flex-col bg-white overflow-auto py-8 ${
             mobileNavOpen ? "flex" : "hidden"
           }`}
         >
-          <Accordion.Root type="multiple" className="flex-1">
-            {mainNavLinks?.map((mainNavLink, i) => (
-              <Accordion.Item value={"item" + i} key={i}>
-                <Accordion.Trigger className="group w-full text-left">
-                  <a
-                    {...mainNavLink.link}
-                    className="relative flex items-center border-t border-gray-900 py-5 px-8 text-[13px] text-gray-700"
-                  >
-                    <span className="flex-1">{mainNavLink.text}</span>
+          <Accordion.Root type="multiple" className="flex-1" asChild>
+            <ul className="text-[18px] font-bold">
+              {links?.map((link, i) => (
+                <Accordion.Item value={"item" + i} key={i} asChild>
+                  <li>
+                    <Accordion.Trigger className="group flex items-center gap-2 px-6 py-5 w-full text-left">
+                      {link.text}{" "}
+                      <svg
+                        viewBox="0 0 7 5"
+                        fill="none"
+                        className="w-[7px] h-[5px] stroke-current relative top-[1px] transition-transform duration-[250] linear group-data-[state=open]:-rotate-180"
+                      >
+                        <path
+                          d="M1 1L3.5 3.5L6 1"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </Accordion.Trigger>
 
-                    {mainNavLink.subnavGroups?.length > 0 ? (
-                      <div className="w-3 border-[6px] border-b-0 border-x-transparent border-t-gray-900 transition-transform duration-[400ms] group-data-[state=open]:rotate-180"></div>
-                    ) : null}
-                  </a>
-                </Accordion.Trigger>
+                    {link.subnavGroups?.length > 0 ? (
+                      <Accordion.AccordionContent className="px-10 pt-5 pb-8 space-y-8">
+                        {link.subnavGroups?.map((subnavGroup, i) => (
+                          <ul
+                            key={i}
+                            className="border-b border-[#eeeeee] pb-2"
+                          >
+                            {subnavGroup.heading.length > 0 ? (
+                              <li className="uppercase text-[#535f6e] pb-2 font-bold text-[10px] tracking-widest">
+                                {subnavGroup.heading}
+                              </li>
+                            ) : null}
 
-                {mainNavLink.subnavGroups?.length > 0 ? (
-                  <Accordion.AccordionContent className="px-8 pt-5 pb-8 space-y-8">
-                    {mainNavLink.subnavGroups?.map((subnavGroup, i) => (
-                      <ul key={i} className="space-y-3">
-                        {subnavGroup.heading.length > 0 ? (
-                          <li className="text-gray-600 text-eyebrow">
-                            {subnavGroup.heading}
-                          </li>
-                        ) : null}
+                            {subnavGroup.subnavLinks?.map((subnavLink, i) => (
+                              <li key={i}>
+                                <a
+                                  className="group flex items-center gap-x-4 hover:bg-[#f5f5ff] w-full select-none py-2 outline-none cursor-pointer transition-colors"
+                                  {...link}
+                                >
+                                  {subnavLink.icon && (
+                                    <Image
+                                      src={subnavLink?.icon.url}
+                                      alt="Icon"
+                                      width={24}
+                                      height={24}
+                                    />
+                                  )}
 
-                        {subnavGroup.subnavLinks?.map((subnavLink, i) => (
-                          <li key={i}>
-                            <a
-                              {...subnavLink.link}
-                              className="text leading-[27px] text-gray-600"
-                            >
-                              {subnavLink.text}
-                            </a>
-                          </li>
+                                  <div className="flex-1 tracking-wide">
+                                    <p className="text-[#515151] group-hover:text-[#3333ff] font-bold text-[16px] leading-[1.5]">
+                                      {subnavLink.linkText}
+                                    </p>
+
+                                    {subnavLink.subtext && (
+                                      <p className="text-[#717171] text-[14px] font-normal group-hover:text-[#3333ff] leading-[1.5]">
+                                        {subnavLink.subtext}
+                                      </p>
+                                    )}
+                                  </div>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
                         ))}
-                      </ul>
-                    ))}
-                  </Accordion.AccordionContent>
-                ) : null}
-              </Accordion.Item>
-            ))}
+                      </Accordion.AccordionContent>
+                    ) : null}
+                  </li>
+                </Accordion.Item>
+              ))}
+              <li>
+                <Link
+                  href="https://docs.transcend.io/docs"
+                  className="px-6 py-5 w-full block"
+                >
+                  Docs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://app.transcend.io/login"
+                  className="px-6 py-5 w-full block"
+                >
+                  Log In
+                </Link>
+              </li>
+              {ctaText ? (
+                <li className="px-6 py-5 w-full text-center">
+                  <a
+                    {...ctaLink}
+                    className="text-center tracking-wider rounded-lg border border-current px-5 py-2.5 transition-colors"
+                  >
+                    {ctaText}
+                  </a>
+                </li>
+              ) : null}
+            </ul>
           </Accordion.Root>
-        </nav> */}
+        </nav>
       </header>
     </>
   );
