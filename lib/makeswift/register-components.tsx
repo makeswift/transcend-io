@@ -94,9 +94,6 @@ ReactRuntime.registerComponent(Navigation, {
                       }),
                     },
                   }),
-                  getItemLabel(subnavLink) {
-                    return subnavLink?.linkText || "Link";
-                  },
                 }),
               },
             }),
