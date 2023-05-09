@@ -43,7 +43,7 @@ export default useSticky;
 
 type SubnavLink = {
   icon?: { url: string; dimensions: { width: number; height: number } };
-  linkText?: string;
+  linkText: string;
   link?: {
     href: string;
     onClick(event: MouseEvent): void;

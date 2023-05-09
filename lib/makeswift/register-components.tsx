@@ -94,6 +94,9 @@ ReactRuntime.registerComponent(Navigation, {
                       }),
                     },
                   }),
+                  getItemLabel(subnavLink) {
+                    return subnavLink?.linkText || "Link";
+                  },
                 }),
               },
             }),
@@ -103,8 +106,8 @@ ReactRuntime.registerComponent(Navigation, {
           }),
         },
       }),
-      getItemLabel(mainNavLink) {
-        return mainNavLink?.text || "Link";
+      getItemLabel(links) {
+        return links?.text || "Link";
       },
     }),
     ctaText: TextInput({
