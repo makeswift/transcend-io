@@ -54,12 +54,12 @@ type SubnavLink = {
 
 type SubnavGroup = {
   heading?: string;
-  subnavLinks: SubnavLink[];
+  subnavLinks?: SubnavLink[];
 };
 
 type Link = {
   text?: string;
-  subnavGroups: SubnavGroup[];
+  subnavGroups?: SubnavGroup[];
 };
 
 type Props = {
@@ -151,7 +151,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                     forceMount
                     className="data-[state=open]:opacity-100 data-[state=closed]:opacity-0 absolute top-full -left-16 w-full sm:w-auto flex bg-white rounded-xl shadow-md transition-opacity overflow-hidden"
                   >
-                    {link.subnavGroups.map((subnavGroup, i) => (
+                    {link.subnavGroups?.map((subnavGroup, i) => (
                       <ul
                         key={i}
                         className="w-[280px] border-r border-[#f4f4f4]"
@@ -159,7 +159,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                         <li className="uppercase text-[#535f6e] px-6 pt-6 pb-2 font-bold text-[10px] tracking-widest">
                           {subnavGroup.heading}
                         </li>
-                        {subnavGroup.subnavLinks.map((subnavLink, i) => (
+                        {subnavGroup.subnavLinks?.map((subnavLink, i) => (
                           <li key={i}>
                             <NavigationMenu.Link asChild>
                               <a
@@ -280,7 +280,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                       </svg>
                     </Accordion.Trigger>
 
-                    {link.subnavGroups?.length > 0 ? (
+                    {link.subnavGroups?.length && (
                       <Accordion.AccordionContent className="px-10 pt-5 pb-8 space-y-8">
                         {link.subnavGroups?.map((subnavGroup, i) => (
                           <ul
@@ -293,7 +293,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                               </li>
                             )}
 
-                            {subnavGroup.subnavLinks.map((subnavLink, i) => (
+                            {subnavGroup.subnavLinks?.map((subnavLink, i) => (
                               <li key={i}>
                                 <a
                                   className="group flex items-center gap-x-4 hover:bg-[#f5f5ff] w-full select-none py-2 outline-none cursor-pointer transition-colors"
@@ -325,7 +325,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                           </ul>
                         ))}
                       </Accordion.AccordionContent>
-                    ) : null}
+                    )}
                   </li>
                 </Accordion.Item>
               ))}
