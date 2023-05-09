@@ -43,13 +43,13 @@ export default useSticky;
 
 type SubnavLink = {
   icon?: { url: string; dimensions: { width: number; height: number } };
-  linkText: string;
-  link: {
+  linkText?: string;
+  link?: {
     href: string;
     onClick(event: MouseEvent): void;
     target?: "_self" | "_blank";
   };
-  subtext: string;
+  subtext?: string;
 };
 
 type SubnavGroup = {
