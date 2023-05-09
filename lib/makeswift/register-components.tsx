@@ -94,21 +94,12 @@ ReactRuntime.registerComponent(Navigation, {
                       }),
                     },
                   }),
-                  getItemLabel(subnavLink) {
-                    return subnavLink?.linkText || "Link";
-                  },
                 }),
               },
             }),
-            getItemLabel(subnavGroup) {
-              return subnavGroup?.heading || "Heading";
-            },
           }),
         },
       }),
-      getItemLabel(links) {
-        return links?.text || "Link";
-      },
     }),
     ctaText: TextInput({
       label: "CTA text",
