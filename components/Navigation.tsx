@@ -42,7 +42,7 @@ const useSticky = () => {
 export default useSticky;
 
 type SubnavLink = {
-  icon: { url: string; dimensions: { width: number; height: number } };
+  icon?: { url: string; dimensions: { width: number; height: number } };
   linkText: string;
   link: {
     href: string;
@@ -166,7 +166,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                                 className="group flex items-start gap-x-4 hover:bg-[#f5f5ff] w-full select-none px-6 py-2 outline-none cursor-pointer transition-colors"
                                 {...link}
                               >
-                                {subnavLink.icon && (
+                                {subnavLink?.icon && (
                                   <Image
                                     src={subnavLink.icon.url}
                                     alt="Icon"
