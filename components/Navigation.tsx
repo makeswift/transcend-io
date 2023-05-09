@@ -53,7 +53,7 @@ type SubnavLink = {
 };
 
 type SubnavGroup = {
-  heading: string;
+  heading?: string;
   subnavLinks: SubnavLink[];
 };
 
@@ -287,13 +287,13 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                             key={i}
                             className="border-b border-[#eeeeee] pb-2"
                           >
-                            {subnavGroup.heading.length > 0 ? (
+                            {subnavGroup.heading && (
                               <li className="uppercase text-[#535f6e] pb-2 font-bold text-[10px] tracking-widest">
                                 {subnavGroup.heading}
                               </li>
-                            ) : null}
+                            )}
 
-                            {subnavGroup.subnavLinks?.map((subnavLink, i) => (
+                            {subnavGroup.subnavLinks.map((subnavLink, i) => (
                               <li key={i}>
                                 <a
                                   className="group flex items-center gap-x-4 hover:bg-[#f5f5ff] w-full select-none py-2 outline-none cursor-pointer transition-colors"
