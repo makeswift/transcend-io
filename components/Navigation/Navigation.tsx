@@ -4,81 +4,81 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+} from "react"
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
-import * as Accordion from "@radix-ui/react-accordion";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-import clsx from "clsx";
+import * as Accordion from "@radix-ui/react-accordion"
+import * as NavigationMenu from "@radix-ui/react-navigation-menu"
+import clsx from "clsx"
 
 const useSticky = () => {
-  const stickyRef = useRef<HTMLDivElement | null>(null);
-  const [sticky, setSticky] = useState(false);
-  const [offset, setOffset] = useState(0);
+  const stickyRef = useRef<HTMLDivElement | null>(null)
+  const [sticky, setSticky] = useState(false)
+  const [offset, setOffset] = useState(0)
 
   useEffect(() => {
     if (!stickyRef.current) {
-      return;
+      return
     }
-    setOffset(stickyRef.current.offsetTop);
-  }, [stickyRef, setOffset]);
+    setOffset(stickyRef.current.offsetTop)
+  }, [stickyRef, setOffset])
 
   useEffect(() => {
     const handleScroll = () => {
       if (!stickyRef.current) {
-        return;
+        return
       }
 
-      setSticky(window.scrollY > offset);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [setSticky, stickyRef, offset]);
-  return { stickyRef, sticky };
-};
+      setSticky(window.scrollY > offset)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [setSticky, stickyRef, offset])
+  return { stickyRef, sticky }
+}
 
-export default useSticky;
+export default useSticky
 
 type SubnavLink = {
-  icon?: { url: string; dimensions: { width: number; height: number } };
-  linkText?: string;
+  icon?: { url: string; dimensions: { width: number; height: number } }
+  linkText?: string
   link?: {
-    href: string;
-    onClick(event: MouseEvent): void;
-    target?: "_self" | "_blank";
-  };
-  subtext?: string;
-};
+    href: string
+    onClick(event: MouseEvent): void
+    target?: "_self" | "_blank"
+  }
+  subtext?: string
+}
 
 type SubnavGroup = {
-  heading: string;
-  subnavLinks?: SubnavLink[];
-};
+  heading: string
+  subnavLinks?: SubnavLink[]
+}
 
 type Link = {
-  text?: string;
-  subnavGroups?: SubnavGroup[];
-};
+  text?: string
+  subnavGroups?: SubnavGroup[]
+}
 
 type Props = {
-  className?: string;
-  links?: Link[];
+  className?: string
+  links?: Link[]
   ctaLink?: {
-    href: string;
-    onClick(event: MouseEvent): void;
-    target?: "_self" | "_blank";
-  };
-  ctaText?: string;
-};
+    href: string
+    onClick(event: MouseEvent): void
+    target?: "_self" | "_blank"
+  }
+  ctaText?: string
+}
 
 export function Navigation({ className, links, ctaText, ctaLink }: Props) {
-  const { sticky, stickyRef } = useSticky();
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { sticky, stickyRef } = useSticky()
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", mobileNavOpen);
-  }, [mobileNavOpen]);
+    document.body.classList.toggle("overflow-hidden", mobileNavOpen)
+  }, [mobileNavOpen])
 
   return (
     <>
@@ -360,5 +360,5 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
         </nav>
       </header>
     </>
-  );
+  )
 }
