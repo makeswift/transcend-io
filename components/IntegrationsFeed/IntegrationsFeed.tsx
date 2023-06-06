@@ -13,21 +13,16 @@ type Props = {
 
 export function IntegrationsFeed({ className }: Props) {
   const [query, setQuery] = useState('')
-  const [{ limit, skip, filter }, setParams] = useState(DEFAULT_FEED_PARAMS)
-  const { data, isLoading } = useSWR(getCacheKey('integrations', { limit, skip, filter }), () =>
-    fetchIntegrations({ limit, skip, filter }),
+  const [{ limit, skip }, setParams] = useState(DEFAULT_FEED_PARAMS)
+  const [filter, setFilter] = useState<string | undefined>()
+  const { data, isLoading } = useSWR(getCacheKey('integrations', { skip, limit, filter }), () =>
+    fetchIntegrations({ skip, limit, filter }),
   )
   const [pages, setPages] = useState(
     data ? [...Array.from({ length: data.total / limit }).keys()] : [],
   )
 
-  useDebounce(
-    () => {
-      setParams(p => ({ ...p, skip: 0, filter: query }))
-    },
-    200,
-    [query],
-  )
+  useDebounce(() => setFilter(query), 200, [query])
 
   useEffect(() => {
     if (!data?.total) return

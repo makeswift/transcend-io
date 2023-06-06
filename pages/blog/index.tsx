@@ -3,8 +3,9 @@ import { GetStaticPropsContext } from 'next/types'
 import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswift/runtime/next'
 import { SWRConfig } from 'swr'
 
-import { getIntegrations } from '@/lib/contentful/client'
-import { client } from '@/lib/makeswift/client'
+import { BlogPostsDocument, CategoriesDocument } from '@/generated/dato'
+import { request } from '@/lib/dato/client'
+import { client as MakeswiftClient } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
 import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
 
@@ -12,7 +13,7 @@ export async function getStaticProps({
   previewData,
   preview,
 }: GetStaticPropsContext<{ slug: string }, { makeswift: boolean }>) {
-  const snapshot = await client.getPageSnapshot('/integrations', {
+  const snapshot = await MakeswiftClient.getPageSnapshot('/blog', {
     preview: previewData?.makeswift == true,
   })
 
@@ -22,7 +23,11 @@ export async function getStaticProps({
     props: {
       snapshot,
       fallback: {
-        [getCacheKey('integrations')]: await getIntegrations(),
+        [getCacheKey('blog', DEFAULT_FEED_PARAMS)]: await request(
+          BlogPostsDocument,
+          DEFAULT_FEED_PARAMS,
+        ),
+        [getCacheKey('category')]: await request(CategoriesDocument),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,
