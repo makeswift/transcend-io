@@ -6,13 +6,11 @@ import { ReactRuntime } from '@makeswift/runtime/react'
 
 ReactRuntime.registerComponent(
   forwardNextDynamicRef(patch =>
-    dynamic(() =>
-      patch(import('./IntegrationsFeed').then(({ IntegrationsFeed }) => IntegrationsFeed)),
-    ),
+    dynamic(() => patch(import('./BlogCategories').then(({ BlogCategories }) => BlogCategories))),
   ),
   {
-    type: 'IntegrationsFeed',
-    label: 'Feeds/Integrations Feed',
+    type: 'BlogCategories',
+    label: 'Feeds/Blog Categories',
     props: {
       className: Style(),
     },

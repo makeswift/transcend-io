@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useDebounce } from 'react-use'
+import { useEffect, useMemo, useState } from 'react'
 
 import clsx from 'clsx'
+import debounce from 'lodash.debounce'
 import useSWR from 'swr'
 
 import { fetchIntegrations } from '@/lib/contentful/fetchers'
@@ -12,7 +12,6 @@ type Props = {
 }
 
 export function IntegrationsFeed({ className }: Props) {
-  const [query, setQuery] = useState('')
   const [{ limit, skip }, setParams] = useState(DEFAULT_FEED_PARAMS)
   const [filter, setFilter] = useState<string | undefined>()
   const { data, isLoading } = useSWR(getCacheKey('integrations', { skip, limit, filter }), () =>
@@ -21,8 +20,10 @@ export function IntegrationsFeed({ className }: Props) {
   const [pages, setPages] = useState(
     data ? [...Array.from({ length: data.total / limit }).keys()] : [],
   )
-
-  useDebounce(() => setFilter(query), 200, [query])
+  const debouncedSetFilter = useMemo(
+    () => debounce((pattern: string) => setFilter(pattern), 200),
+    [],
+  )
 
   useEffect(() => {
     if (!data?.total) return
@@ -36,8 +37,7 @@ export function IntegrationsFeed({ className }: Props) {
     <div className={clsx(className, 'relative flex flex-col gap-4')}>
       <input
         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        value={query}
-        onChange={e => setQuery(e.currentTarget.value)}
+        onChange={e => debouncedSetFilter(e.currentTarget.value)}
       />
       <div className="flex flex-wrap justify-center gap-8">
         {data

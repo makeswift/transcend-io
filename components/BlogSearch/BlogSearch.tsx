@@ -1,35 +1,34 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ComponentPropsWithoutRef, useState } from 'react'
-import { useDebounce } from 'react-use'
+import { useMemo, useState } from 'react'
 
 import { Combobox } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
+import debounce from 'lodash.debounce'
 import useSWR from 'swr'
 
 import { BlogSearchDocument, PostModelFilter, PostRecord } from '@/generated/dato'
+import { Spinner } from '@/generated/icons'
 import { request } from '@/lib/dato/client'
 import { getCacheKey } from '@/lib/utils'
-
-import { Spinner } from '../Spinner'
 
 type Props = {
   className?: string
 }
 
 export function BlogSearch({ className }: Props) {
-  const [query, setQuery] = useState('')
+  const router = useRouter()
   const [filter, setFilter] = useState<PostModelFilter | undefined>()
-  const { data, isLoading } = useSWR(getCacheKey('blog/search', { filter }), () =>
+  const { data, isLoading } = useSWR(filter && getCacheKey('blog/search', { filter }), () =>
     request(BlogSearchDocument, { filter }),
   )
-  const router = useRouter()
-
-  useDebounce(
-    () => setFilter({ title: { matches: { pattern: query, caseSensitive: false } } }),
-    200,
-    [query],
+  const debouncedSetFilter = useMemo(
+    () =>
+      debounce(
+        (pattern: string) => setFilter({ title: { matches: { pattern, caseSensitive: false } } }),
+        200,
+      ),
+    [],
   )
 
   return (
@@ -44,12 +43,12 @@ export function BlogSearch({ className }: Props) {
           className={clsx(
             'w-full rounded-md border border-black border-opacity-20 bg-white px-4 py-3 pr-10 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm',
           )}
-          onChange={e => setQuery(e.currentTarget.value)}
+          onChange={e => debouncedSetFilter(e.currentTarget.value)}
           displayValue={(item: PostRecord) => item.title}
         />
         <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           {isLoading ? (
-            <Spinner className="text-black" />
+            <Spinner className="h-5 w-5 animate-spin text-black/80" />
           ) : (
             <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           )}

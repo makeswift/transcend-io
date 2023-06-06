@@ -10,7 +10,7 @@ runtime.registerComponent(
     dynamic(() => patch(import('./Headroom').then(({ Headroom }) => Headroom))),
   ),
   {
-    type: 'headroom',
+    type: 'Headroom',
     label: 'Headroom',
     props: {
       children: Slot(),

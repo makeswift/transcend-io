@@ -22,7 +22,9 @@ export async function getStaticProps({
     props: {
       snapshot,
       fallback: {
-        [getCacheKey('integrations')]: await getIntegrations(),
+        [getCacheKey('integrations', DEFAULT_FEED_PARAMS)]: await getIntegrations(
+          DEFAULT_FEED_PARAMS,
+        ),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,

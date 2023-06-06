@@ -1,9 +1,9 @@
 import { strict } from 'assert'
 import { EntryCollection, createClient } from 'contentful'
 
-import { IIntegration } from '@/lib/generated/contentful'
+import { IIntegration } from '@/generated/contentful'
 
-import { DEFAULT_FEED_PARAMS } from './defaults'
+import { DEFAULT_FEED_PARAMS } from '../utils'
 
 strict(process.env.CONTENTFUL_SPACE_ID)
 strict(process.env.CONTENTFUL_ACCESS_TOKEN)

@@ -4,7 +4,7 @@ import React from 'react'
 
 import clsx from 'clsx'
 import { useKeenSlider } from 'keen-slider/react'
-import debounce from 'lodash/debounce'
+import debounce from 'lodash.debounce'
 
 type Slide = {
   slideColor?: string

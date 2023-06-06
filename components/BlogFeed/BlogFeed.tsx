@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Ref, forwardRef, useEffect, useState } from 'react'
-import { useDebounce } from 'react-use'
 
 import clsx from 'clsx'
 import useSWR from 'swr'
@@ -33,14 +32,6 @@ export const BlogFeed = forwardRef(function BlogFeed(
   )
 
   console.log({ categoryData, blogPostData })
-
-  useDebounce(
-    () => {
-      setParams(p => ({ ...p, skip: 0, filter: query }))
-    },
-    200,
-    [query],
-  )
 
   useEffect(() => {
     if (!total) return
