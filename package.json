@@ -5,7 +5,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output generated/contentful.d.ts"
+    "icons": "npx @svgr/cli --typescript --replace-attr-values \"#000=currentColor\" --out-dir icons -- public/icons",
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output generated/contentful.d.ts",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
   },
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^16.0.3",

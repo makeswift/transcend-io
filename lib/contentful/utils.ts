@@ -1,6 +1,6 @@
-import { ContentTypeCollection, Field } from "contentful"
+import { ContentTypeCollection, Field } from 'contentful'
 
-import { CONTENT_TYPE } from "@/generated/contentful"
+import { CONTENT_TYPE } from '@/generated/contentful'
 
 type FieldMap = { id: string; name: string; path: string }
 
@@ -9,33 +9,31 @@ export function resolveFieldMappings(
   contentTypes: ContentTypeCollection,
   filter: (field: Field) => boolean = () => true,
   path: { id: string; name: string }[] = [],
-  mappings: FieldMap[] = []
+  mappings: FieldMap[] = [],
 ): FieldMap[] {
-  const rootType = contentTypes.items.find((ct) => ct.sys.id === rootTypeId)
+  const rootType = contentTypes.items.find(ct => ct.sys.id === rootTypeId)
 
   if (!rootType || path.length > 4) return mappings
 
-  rootType.fields.forEach((field) => {
+  rootType.fields.forEach(field => {
     const fieldId = field.id
     const linkedContentTypes = [
       ...new Set(
         field.validations?.flatMap(({ linkContentType }) =>
-          Array.isArray(linkContentType) && linkContentType.length > 0
-            ? linkContentType
-            : []
-        )
+          Array.isArray(linkContentType) && linkContentType.length > 0 ? linkContentType : [],
+        ),
       ),
     ]
 
-    if (field.type === "Link" && field.linkType === "Entry") {
+    if (field.type === 'Link' && field.linkType === 'Entry') {
       if (linkedContentTypes.length > 0) {
-        linkedContentTypes.forEach((id) => {
+        linkedContentTypes.forEach(id => {
           resolveFieldMappings(
             id,
             contentTypes,
             filter,
             [...path, { id: fieldId, name: field.name }],
-            mappings
+            mappings,
           )
         })
       } else {
@@ -44,22 +42,20 @@ export function resolveFieldMappings(
           contentTypes,
           filter,
           [...path, { id: fieldId, name: field.name }],
-          mappings
+          mappings,
         )
       }
     } else if (filter(field)) {
       mappings.push({
-        id: [...path.map(({ id }) => id), field.id].join("."),
+        id: [...path.map(({ id }) => id), field.id].join('.'),
         name: [
           field.name,
           ...path
             .slice()
             .reverse()
             .map(({ name }) => name),
-        ].join(" < "),
-        path: `fields.${[...path.map(({ id }) => id), field.id].join(
-          ".fields."
-        )}`,
+        ].join(' < '),
+        path: `fields.${[...path.map(({ id }) => id), field.id].join('.fields.')}`,
       })
     }
   })
@@ -76,9 +72,9 @@ export async function getContentTypeOptions({
   filter?: (field: Field) => boolean
   query: string
 }): Promise<{ id: string; label: string; value: string }[]> {
-  const contentTypes: ContentTypeCollection = await fetch(
-    "/api/contentful/content_types"
-  ).then((r) => r.json())
+  const contentTypes: ContentTypeCollection = await fetch('/api/contentful/content_types').then(r =>
+    r.json(),
+  )
 
   return resolveFieldMappings(contentTypeId, contentTypes, filter)
     .filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()))

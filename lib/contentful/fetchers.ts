@@ -1,7 +1,7 @@
-import { ContentfulCollection } from "contentful"
+import { ContentfulCollection } from 'contentful'
 
-import { DEFAULT_FEED_PARAMS } from "@/lib/utils"
-import { IIntegration } from "@/generated/contentful"
+import { IIntegration } from '@/generated/contentful'
+import { DEFAULT_FEED_PARAMS } from '@/lib/utils'
 
 export type PaginationParams = {
   limit: number
@@ -15,25 +15,20 @@ export async function fetchIntegrations({
   skip,
   order,
   filter,
-}: PaginationParams = DEFAULT_FEED_PARAMS): Promise<
-  ContentfulCollection<IIntegration>
-> {
+}: PaginationParams = DEFAULT_FEED_PARAMS): Promise<ContentfulCollection<IIntegration>> {
   try {
     const results = await fetch(
-      "/api/contentful/integrations?" +
+      '/api/contentful/integrations?' +
         new URLSearchParams({
           limit: limit.toString(),
           skip: skip.toString(),
           ...(order ? { order } : {}),
           ...(filter ? { filter } : {}),
-        })
-    ).then((r) => r.json())
+        }),
+    ).then(r => r.json())
 
     if (results.error) {
-      throw new Error(
-        "Failed to fetch Integrations\n" +
-          JSON.stringify(results.error, null, 2)
-      )
+      throw new Error('Failed to fetch Integrations\n' + JSON.stringify(results.error, null, 2))
     }
 
     return results

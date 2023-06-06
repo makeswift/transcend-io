@@ -1,5 +1,5 @@
-const { loadEnvConfig } = require("@next/env")
-const contentful = require("contentful-management")
+const { loadEnvConfig } = require('@next/env')
+const contentful = require('contentful-management')
 
 module.exports = async function () {
   loadEnvConfig(process.env.PWD)
@@ -10,5 +10,5 @@ module.exports = async function () {
 
   return client
     .getSpace(process.env.CONTENTFUL_SPACE_ID)
-    .then((space) => space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT))
+    .then(space => space.getEnvironment(process.env.CONTENTFUL_ENVIRONMENT))
 }

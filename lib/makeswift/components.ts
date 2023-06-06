@@ -1,5 +1,5 @@
-import "@/components/Carousel/Carousel.makeswift"
-import "@/components/Headroom/Headroom.makeswift"
-import "@/components/IntegrationsFeed/IntegrationsFeed.makeswift"
-import "@/components/Marquee/Marquee.makeswift"
-import "@/components/Navigation/Navigation.makeswift"
+import '@/components/Carousel/Carousel.makeswift'
+import '@/components/Headroom/Headroom.makeswift'
+import '@/components/IntegrationsFeed/IntegrationsFeed.makeswift'
+import '@/components/Marquee/Marquee.makeswift'
+import '@/components/Navigation/Navigation.makeswift'
