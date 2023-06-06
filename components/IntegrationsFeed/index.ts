@@ -1,1 +1,1 @@
-export * from "./IntegrationsFeed"
+export * from './IntegrationsFeed'

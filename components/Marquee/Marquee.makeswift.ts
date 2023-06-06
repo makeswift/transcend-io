@@ -1,41 +1,34 @@
-import { ReactRuntime } from "@makeswift/runtime/react"
-import { Marquee } from "./Marquee"
-import {
-  List,
-  Shape,
-  Image,
-  TextInput,
-  Number,
-  Color,
-  Style,
-} from "@makeswift/runtime/controls"
+import { Color, Image, List, Number, Shape, Style, TextInput } from '@makeswift/runtime/controls'
+import { ReactRuntime } from '@makeswift/runtime/react'
+
+import { Marquee } from './Marquee'
 
 ReactRuntime.registerComponent(Marquee, {
-  type: "marquee",
-  label: "Marquee",
+  type: 'marquee',
+  label: 'Marquee',
   props: {
     logos: List({
-      label: "Logos",
+      label: 'Logos',
       type: Shape({
         type: {
           logoImage: Image({
-            label: "Logo",
+            label: 'Logo',
             format: Image.Format.WithDimensions,
           }),
-          logoAlt: TextInput({ label: "Logo alt text", defaultValue: "Image" }),
+          logoAlt: TextInput({ label: 'Logo alt text', defaultValue: 'Image' }),
           logoWidth: Number({
-            label: "Width",
+            label: 'Width',
             defaultValue: 120,
-            suffix: "px",
+            suffix: 'px',
           }),
         },
       }),
       getItemLabel(logo) {
-        return logo?.logoAlt || "Untitled"
+        return logo?.logoAlt || 'Untitled'
       },
     }),
-    gap: Number({ label: "Gap", defaultValue: 48 }),
-    fadeColor: Color({ label: "Fade color", defaultValue: "#ffffff" }),
+    gap: Number({ label: 'Gap', defaultValue: 48 }),
+    fadeColor: Color({ label: 'Fade color', defaultValue: '#ffffff' }),
     className: Style(),
   },
 })

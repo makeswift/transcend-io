@@ -1,7 +1,8 @@
-import { getIntegrations } from "@/lib/contentful/client"
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiRequest, NextApiResponse } from 'next'
 
-import { z } from "zod"
+import { z } from 'zod'
+
+import { getIntegrations } from '@/lib/contentful/client'
 
 const params = z.object({
   skip: z.string().optional(),
@@ -12,10 +13,9 @@ const params = z.object({
 
 export default async function contentfulIntegrations(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): Promise<void> {
-  if (req.method !== "GET")
-    return res.status(405).json({ error: "Method Not Allowed" })
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method Not Allowed' })
 
   try {
     const { skip = 0, limit = 8, order, filter } = params.parse(req.query)

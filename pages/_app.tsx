@@ -1,19 +1,19 @@
-import { useEffect } from "react"
+import { AppProps } from 'next/app'
+import { useEffect } from 'react'
 
-import { AppProps } from "next/app"
+import clsx from 'clsx'
 
-import { NeueHaasDisplay } from "@/lib/fonts"
-import clsx from "clsx"
+import { NeueHaasDisplay } from '@/lib/fonts'
 
-import "../styles/globals.css"
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    document.body.classList.add(NeueHaasDisplay.variable, "font-sans")
+    document.body.classList.add(NeueHaasDisplay.variable, 'font-sans')
   }, [])
 
   return (
-    <main className={clsx(NeueHaasDisplay.variable, "font-sans")}>
+    <main className={clsx(NeueHaasDisplay.variable, 'font-sans')}>
       <Component {...pageProps} />
     </main>
   )

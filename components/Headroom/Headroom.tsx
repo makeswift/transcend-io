@@ -1,6 +1,5 @@
-import { ReactNode, Ref, forwardRef } from "react"
-
-import ReactHeadroom from "react-headroom"
+import { ReactNode, Ref, forwardRef } from 'react'
+import ReactHeadroom from 'react-headroom'
 
 type Props = {
   upTolerance?: number
@@ -11,7 +10,7 @@ type Props = {
 
 export const Headroom = forwardRef(function Headroom(
   { children, ...rest }: Props,
-  ref: Ref<HTMLDivElement>
+  ref: Ref<HTMLDivElement>,
 ) {
   return (
     <div ref={ref} className="w-full">

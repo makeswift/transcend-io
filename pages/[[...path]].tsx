@@ -1,42 +1,33 @@
-import "@/lib/makeswift/components"
+import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from 'next'
 
-import {
-  GetStaticPathsResult,
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-} from "next"
+import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswift/runtime/next'
 
-import {
-  Page as MakeswiftPage,
-  PageProps as MakeswiftPageProps,
-} from "@makeswift/runtime/next"
-import { client } from "@/lib/makeswift/client"
+import { client } from '@/lib/makeswift/client'
+import '@/lib/makeswift/components'
 
 type ParsedUrlQuery = { path?: string[] }
 
-export async function getStaticPaths(): Promise<
-  GetStaticPathsResult<ParsedUrlQuery>
-> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult<ParsedUrlQuery>> {
   const pages = await client.getPages()
 
   return {
     paths: pages
-      .filter((page) => page.path !== "/integrations")
-      .map((page) => ({
+      .filter(page => page.path !== '/integrations')
+      .map(page => ({
         params: {
-          path: page.path.split("/").filter((segment) => segment !== ""),
+          path: page.path.split('/').filter(segment => segment !== ''),
         },
       })),
-    fallback: "blocking",
+    fallback: 'blocking',
   }
 }
 
 type Props = MakeswiftPageProps
 
 export async function getStaticProps(
-  ctx: GetStaticPropsContext<ParsedUrlQuery>
+  ctx: GetStaticPropsContext<ParsedUrlQuery>,
 ): Promise<GetStaticPropsResult<Props>> {
-  const path = "/" + (ctx.params?.path ?? []).join("/")
+  const path = '/' + (ctx.params?.path ?? []).join('/')
   const snapshot = await client.getPageSnapshot(path, {
     preview: ctx.preview,
   })
