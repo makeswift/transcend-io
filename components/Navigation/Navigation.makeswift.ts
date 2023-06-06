@@ -8,10 +8,12 @@ import {
   Style,
   Link,
 } from "@makeswift/runtime/controls"
+import { MakeswiftComponentType } from "@makeswift/runtime"
 
 ReactRuntime.registerComponent(Navigation, {
-  type: "navigation",
+  type: MakeswiftComponentType.Navigation,
   label: "Navigation",
+  icon: "Navigation40",
   props: {
     className: Style(),
     links: List({

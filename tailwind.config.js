@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-neue-haas-grotesk)"],
+      },
       keyframes: {
         marqueeScroll: {
           "0%": { transform: "translateX(0)" },
@@ -15,4 +18,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

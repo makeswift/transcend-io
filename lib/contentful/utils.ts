@@ -1,6 +1,6 @@
-import { CONTENT_TYPE } from "@/lib/generated/contentful"
 import { ContentTypeCollection, Field } from "contentful"
-import { DEFAULT_FEED_PARAMS } from "./defaults"
+
+import { CONTENT_TYPE } from "@/generated/contentful"
 
 type FieldMap = { id: string; name: string; path: string }
 
@@ -83,11 +83,4 @@ export async function getContentTypeOptions({
   return resolveFieldMappings(contentTypeId, contentTypes, filter)
     .filter(({ name }) => name.toLowerCase().includes(query.toLowerCase()))
     .map(({ id, name, path }) => ({ id, label: name, value: path }))
-}
-
-export function getFeedCacheKey(
-  type: string,
-  { limit, skip, filter } = DEFAULT_FEED_PARAMS
-) {
-  return `/contentful/${type}?limit=${limit}&skip=${skip}&filter=${filter}`
 }

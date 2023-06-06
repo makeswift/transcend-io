@@ -1,10 +1,10 @@
-import { fetchIntegrations } from "@/lib/contentful/fetchers"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
 import { useDebounce } from "react-use"
-import { DEFAULT_FEED_PARAMS } from "@/lib/contentful/defaults"
-import { getFeedCacheKey } from "@/lib/contentful/utils"
 import clsx from "clsx"
+
+import { getCacheKey, DEFAULT_FEED_PARAMS } from "@/lib/utils"
+import { fetchIntegrations } from "@/lib/contentful/fetchers"
 
 type Props = {
   className?: string
@@ -14,7 +14,7 @@ export function IntegrationsFeed({ className }: Props) {
   const [query, setQuery] = useState("")
   const [{ limit, skip, filter }, setParams] = useState(DEFAULT_FEED_PARAMS)
   const { data, isLoading } = useSWR(
-    getFeedCacheKey("integrations", { limit, skip, filter }),
+    getCacheKey("integrations", { limit, skip, filter }),
     () => fetchIntegrations({ limit, skip, filter })
   )
   const [pages, setPages] = useState(

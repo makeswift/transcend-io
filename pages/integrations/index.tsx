@@ -1,39 +1,33 @@
-import "@/components/makeswift"
+import "@/lib/makeswift/components"
 
 import { SWRConfig } from "swr"
 import { GetStaticPropsContext } from "next/types"
 import {
-  Makeswift,
   Page as MakeswiftPage,
   PageProps as MakeswiftPageProps,
 } from "@makeswift/runtime/next"
-import { strict } from "assert"
+
+import { client } from "@/lib/makeswift/client"
+import { getCacheKey, DEFAULT_FEED_PARAMS } from "@/lib/utils"
 import { getIntegrations } from "@/lib/contentful/client"
-import { IIntegration } from "@/lib/generated/contentful"
-import { getFeedCacheKey } from "@/lib/contentful/utils"
 
 export async function getStaticProps({
   previewData,
   preview,
 }: GetStaticPropsContext<{ slug: string }, { makeswift: boolean }>) {
-  strict(process.env.MAKESWIFT_SITE_API_KEY)
-
-  const makeswiftClient = new Makeswift(process.env.MAKESWIFT_SITE_API_KEY, {
-    apiOrigin: process.env.MAKESWIFT_API_ORIGIN,
-  })
-
-  const snapshot = await makeswiftClient.getPageSnapshot("/integrations", {
+  const snapshot = await client.getPageSnapshot("/integrations", {
     preview: previewData?.makeswift == true,
   })
 
   if (snapshot == null) return { notFound: true }
 
-  const { items, total, limit } = await getIntegrations()
-
   return {
     props: {
       snapshot,
-      fallback: { [getFeedCacheKey("integrations")]: { items, total, limit } },
+      fallback: {
+        [getCacheKey("integrations", DEFAULT_FEED_PARAMS)]:
+          await getIntegrations(),
+      },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,
     },
@@ -41,15 +35,7 @@ export async function getStaticProps({
   }
 }
 
-type Props = {
-  fallback: {
-    string: {
-      items: IIntegration[]
-      total: number
-      limit: number
-    }
-  }
-} & MakeswiftPageProps
+type Props = { fallback: { [key: string]: any } } & MakeswiftPageProps
 
 export default function Page({ snapshot, fallback }: Props) {
   return (

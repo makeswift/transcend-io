@@ -1,4 +1,4 @@
-import { MakeswiftApiHandler } from "@makeswift/runtime/next";
+import { MakeswiftApiHandler } from "@makeswift/runtime/next"
 
 export default MakeswiftApiHandler(process.env.MAKESWIFT_SITE_API_KEY!, {
   apiOrigin: process.env.MAKESWIFT_API_ORIGIN,
@@ -11,20 +11,20 @@ export default MakeswiftApiHandler(process.env.MAKESWIFT_SITE_API_KEY!, {
           {
             weight: "300",
             style: "normal",
-            src: "/fonts/NeueHaasDisplay-Light.woff2",
+            src: "/fonts/NeueHaasGrotesk-Light.woff2",
           },
           {
             weight: "400",
             style: "normal",
-            src: "/fonts/NeueHaasDisplay-Roman.woff2",
+            src: "/fonts/NeueHaasGrotesk-Roman.woff2",
           },
           {
             weight: "700",
             style: "normal",
-            src: "/fonts/NeueHaasDisplay-Mediu.woff2",
+            src: "/fonts/NeueHaasGrotesk-Medium.woff2",
           },
         ],
       },
-    ];
+    ]
   },
-});
+})

@@ -9,10 +9,12 @@ import {
   TextArea,
   Number,
 } from "@makeswift/runtime/controls"
+import { MakeswiftComponentType } from "@makeswift/runtime"
 
 ReactRuntime.registerComponent(Carousel, {
-  type: "carousel",
+  type: MakeswiftComponentType.Carousel,
   label: "Carousel",
+  icon: "Carousel40",
   props: {
     slides: List({
       label: "Slides",

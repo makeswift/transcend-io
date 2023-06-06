@@ -1,6 +1,7 @@
-import { IIntegration } from "@/lib/generated/contentful"
 import { ContentfulCollection } from "contentful"
-import { DEFAULT_FEED_PARAMS } from "./defaults"
+
+import { DEFAULT_FEED_PARAMS } from "@/lib/utils"
+import { IIntegration } from "@/generated/contentful"
 
 export type PaginationParams = {
   limit: number
