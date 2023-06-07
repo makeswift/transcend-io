@@ -5,7 +5,7 @@ export default MakeswiftApiHandler(process.env.MAKESWIFT_SITE_API_KEY!, {
   getFonts() {
     return [
       {
-        family: 'Neue Haas Grotesk',
+        family: 'var(--font-neue-haas-grotesk)',
         variants: [
           {
             weight: '300',
