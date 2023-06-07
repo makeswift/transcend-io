@@ -24,11 +24,11 @@ export async function getStaticProps({
     props: {
       snapshot,
       fallback: {
-        [getCacheKey('blog', DEFAULT_FEED_PARAMS)]: await request(
+        [getCacheKey('blog/feed', DEFAULT_FEED_PARAMS)]: await request(
           BlogPostsDocument,
           DEFAULT_FEED_PARAMS,
         ),
-        [getCacheKey('category')]: await request(CategoriesDocument),
+        [getCacheKey('blog/categories')]: await request(CategoriesDocument),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,

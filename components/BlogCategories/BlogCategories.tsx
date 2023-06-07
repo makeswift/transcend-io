@@ -17,7 +17,9 @@ export const BlogCategories = forwardRef(function BlogCategories(
   { className }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
-  const { data: categoryData } = useSWR(getCacheKey('category'), () => request(CategoriesDocument))
+  const { data: categoryData } = useSWR(getCacheKey('blog/categories'), () =>
+    request(CategoriesDocument),
+  )
 
   return (
     <div className={clsx(className, 'relative flex gap-4')} ref={ref}>

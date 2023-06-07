@@ -17,9 +17,10 @@ export const BlogFeed = forwardRef(function BlogFeed(
   { className }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
+  const [query, setQuery] = useState('')
   const [{ limit, skip }, setParams] = useState(DEFAULT_FEED_PARAMS)
   const [filter, setFilter] = useState<PostModelFilter | undefined>()
-  const { data, isLoading } = useSWR(getCacheKey('blog', { limit, skip, filter }), () =>
+  const { data, isLoading } = useSWR(getCacheKey('blog/feed', { limit, skip, filter }), () =>
     request(BlogPostsDocument, { limit, skip, filter }),
   )
   const total = data?._allPostsMeta.count ?? 0
