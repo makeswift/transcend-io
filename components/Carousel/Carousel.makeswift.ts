@@ -3,9 +3,10 @@ import dynamic from 'next/dynamic'
 import { MakeswiftComponentType } from '@makeswift/runtime'
 import { Image, List, Number, Shape, Style, TextArea, TextInput } from '@makeswift/runtime/controls'
 import { forwardNextDynamicRef } from '@makeswift/runtime/next'
-import { ReactRuntime } from '@makeswift/runtime/react'
 
-ReactRuntime.registerComponent(
+import { runtime } from '@/lib/makeswift/runtime'
+
+runtime.registerComponent(
   forwardNextDynamicRef(patch =>
     dynamic(() => patch(import('./Carousel').then(({ Carousel }) => Carousel))),
   ),

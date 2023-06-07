@@ -2,9 +2,10 @@ import dynamic from 'next/dynamic'
 
 import { Color, Image, List, Number, Shape, Style, TextInput } from '@makeswift/runtime/controls'
 import { forwardNextDynamicRef } from '@makeswift/runtime/next'
-import { ReactRuntime } from '@makeswift/runtime/react'
 
-ReactRuntime.registerComponent(
+import { runtime } from '@/lib/makeswift/runtime'
+
+runtime.registerComponent(
   forwardNextDynamicRef(patch =>
     dynamic(() => patch(import('./Marquee').then(({ Marquee }) => Marquee))),
   ),
