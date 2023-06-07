@@ -8,7 +8,7 @@ import useSWR from 'swr'
 
 import { BlogSearchDocument, PostModelFilter, PostRecord } from '@/generated/dato'
 import { Search } from '@/generated/icons'
-import { request } from '@/lib/dato/client'
+import { client } from '@/lib/dato/client'
 import { getCacheKey } from '@/lib/utils'
 
 type Props = {
@@ -21,7 +21,7 @@ export function BlogSearch({ className, label = 'Search', placeholder = 'Search'
   const router = useRouter()
   const [filter, setFilter] = useState<PostModelFilter | undefined>()
   const { data, isLoading } = useSWR(filter && getCacheKey('blog/search', { filter }), () =>
-    request(BlogSearchDocument, { filter }),
+    client.request(BlogSearchDocument, { filter }),
   )
   const debouncedSetFilter = useMemo(
     () =>
@@ -42,7 +42,7 @@ export function BlogSearch({ className, label = 'Search', placeholder = 'Search'
       <div className="relative mt-1.5">
         <Combobox.Input
           className={clsx(
-            'placeholder:text-md flex h-10 w-full items-center rounded-full border border-black border-opacity-20 bg-white px-4 pr-10 text-lg shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm',
+            'placeholder:text-md focus:border-indigo-500 focus:ring-indigo-500 flex h-10 w-full items-center rounded-full border border-black border-opacity-20 bg-white px-4 pr-10 text-lg shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 sm:text-sm',
           )}
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
           displayValue={(item: PostRecord) => item.title}

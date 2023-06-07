@@ -1,0 +1,7 @@
+query BlogSearch($filter: PostModelFilter) {
+  allPosts(first: 10, filter: $filter) {
+    id
+    title
+    slug
+  }
+}

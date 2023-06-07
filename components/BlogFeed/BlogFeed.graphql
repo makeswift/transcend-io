@@ -1,0 +1,25 @@
+query BlogFeed($limit: IntType, $skip: IntType, $filter: PostModelFilter) {
+  allPosts(first: $limit, skip: $skip, filter: $filter) {
+    id
+    title
+    slug
+    readTime
+    excerpt
+    _publishedAt
+    hero {
+      responsiveImage(imgixParams: { fit: crop, w: 300, h: 200, auto: format }) {
+        sizes
+        src
+        width
+        height
+        alt
+        title
+        base64
+      }
+    }
+  }
+
+  _allPostsMeta {
+    count
+  }
+}

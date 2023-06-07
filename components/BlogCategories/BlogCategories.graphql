@@ -1,0 +1,7 @@
+query BlogCategories {
+  allCategories(first: 100) {
+    id
+    name
+    path
+  }
+}

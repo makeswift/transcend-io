@@ -1,3 +1,10 @@
+@import url('highlight.js/styles/github-dark.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

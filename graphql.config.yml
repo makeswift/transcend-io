@@ -3,7 +3,7 @@ schema:
       headers:
         Authorization: 'Bearer 25c0023baa57996205b6782f4003dc'
         X-Exclude-Invalid: true
-documents: './lib/dato/**/*.graphql'
+documents: '**/*.graphql'
 generates:
   generated/dato.ts:
     plugins:

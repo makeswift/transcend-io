@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 import { MakeswiftComponentType } from '@makeswift/runtime'
-import { Image, Link, List, Shape, Style, TextInput } from '@makeswift/runtime/controls'
+import { Checkbox, Image, Link, List, Shape, Style, TextInput } from '@makeswift/runtime/controls'
 import { forwardNextDynamicRef } from '@makeswift/runtime/next'
 
 import { runtime } from '@/lib/makeswift/runtime'
@@ -16,7 +16,9 @@ runtime.registerComponent(
     icon: 'navigation',
     props: {
       className: Style(),
-      links: List({
+      darkMode: Checkbox({ label: 'Dark mode' }),
+      logoLink: Link({ label: 'Logo on click' }),
+      mainLinks: List({
         label: 'Main navigation',
         type: Shape({
           type: {
@@ -43,9 +45,14 @@ runtime.registerComponent(
                           label: 'Icon',
                           format: Image.Format.WithDimensions,
                         }),
+                        iconAlt: TextInput({
+                          label: 'Icon alt text',
+                          defaultValue: 'Icon',
+                          selectAll: true,
+                        }),
                         linkText: TextInput({
                           label: 'Link text',
-                          defaultValue: 'Link text',
+                          defaultValue: 'Link',
                           selectAll: true,
                         }),
                         subtext: TextInput({
@@ -69,6 +76,22 @@ runtime.registerComponent(
         }),
         getItemLabel(links) {
           return links?.text || 'Link'
+        },
+      }),
+      secondaryLinks: List({
+        label: 'Right links',
+        type: Shape({
+          type: {
+            link: Link({ label: 'On click' }),
+            linkText: TextInput({
+              label: 'Link text',
+              defaultValue: 'Link',
+              selectAll: true,
+            }),
+          },
+        }),
+        getItemLabel(secondaryLink) {
+          return secondaryLink?.linkText || 'Link'
         },
       }),
       ctaText: TextInput({

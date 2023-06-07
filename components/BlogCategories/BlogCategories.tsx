@@ -1,12 +1,11 @@
 import Link from 'next/link'
-import { Ref, forwardRef, useEffect, useState } from 'react'
+import { Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
 import useSWR from 'swr'
 
-import { BlogSearch } from '@/components/BlogSearch'
-import { CategoriesDocument } from '@/generated/dato'
-import { request } from '@/lib/dato/client'
+import { BlogCategoriesDocument } from '@/generated/dato'
+import { client } from '@/lib/dato/client'
 import { getCacheKey } from '@/lib/utils'
 
 type Props = {
@@ -18,7 +17,7 @@ export const BlogCategories = forwardRef(function BlogCategories(
   ref: Ref<HTMLDivElement>,
 ) {
   const { data: categoryData } = useSWR(getCacheKey('blog/categories'), () =>
-    request(CategoriesDocument),
+    client.request(BlogCategoriesDocument),
   )
 
   return (
