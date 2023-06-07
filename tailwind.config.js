@@ -32,10 +32,17 @@ module.exports = {
         xxs: ['.625rem', { lineHeight: '1.6' }],
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
         marqueeScroll: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+      },
+      animation: {
+        fadeIn: 'fadeIn 200ms',
       },
     },
   },
