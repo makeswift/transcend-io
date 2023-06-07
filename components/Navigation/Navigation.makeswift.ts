@@ -13,7 +13,7 @@ runtime.registerComponent(
   {
     type: MakeswiftComponentType.Navigation,
     label: 'Navigation',
-    icon: 'Navigation40',
+    icon: 'navigation',
     props: {
       className: Style(),
       links: List({

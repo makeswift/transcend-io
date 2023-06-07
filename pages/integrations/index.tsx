@@ -6,6 +6,7 @@ import { SWRConfig } from 'swr'
 import { getIntegrations } from '@/lib/contentful/client'
 import { client } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
+import { runtime } from '@/lib/makeswift/runtime'
 import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
 
 export async function getStaticProps({
@@ -38,7 +39,7 @@ type Props = { fallback: { [key: string]: any } } & MakeswiftPageProps
 export default function Page({ snapshot, fallback }: Props) {
   return (
     <SWRConfig value={{ fallback }}>
-      <MakeswiftPage snapshot={snapshot} />
+      <MakeswiftPage snapshot={snapshot} runtime={runtime} />
     </SWRConfig>
   )
 }

@@ -13,7 +13,7 @@ runtime.registerComponent(
   {
     type: MakeswiftComponentType.Carousel,
     label: 'Carousel',
-    icon: 'Carousel40',
+    icon: 'carousel',
     props: {
       slides: List({
         label: 'Slides',

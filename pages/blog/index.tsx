@@ -7,6 +7,7 @@ import { BlogPostsDocument, CategoriesDocument } from '@/generated/dato'
 import { request } from '@/lib/dato/client'
 import { client as MakeswiftClient } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
+import { runtime } from '@/lib/makeswift/runtime'
 import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
 
 export async function getStaticProps({
@@ -41,7 +42,7 @@ type Props = { fallback: { [key: string]: any } } & MakeswiftPageProps
 export default function Page({ snapshot, fallback }: Props) {
   return (
     <SWRConfig value={{ fallback }}>
-      <MakeswiftPage snapshot={snapshot} />
+      <MakeswiftPage snapshot={snapshot} runtime={runtime} />
     </SWRConfig>
   )
 }

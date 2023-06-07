@@ -4,6 +4,7 @@ import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswi
 
 import { client } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
+import { runtime } from '@/lib/makeswift/runtime'
 
 type ParsedUrlQuery = { path?: string[] }
 
@@ -38,5 +39,5 @@ export async function getStaticProps(
 }
 
 export default function Page({ snapshot }: Props) {
-  return <MakeswiftPage snapshot={snapshot} />
+  return <MakeswiftPage snapshot={snapshot} runtime={runtime} />
 }
