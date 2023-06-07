@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import React, { MouseEvent, ReactNode, forwardRef, useEffect, useRef, useState } from 'react'
 
 import * as Accordion from '@radix-ui/react-accordion'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
@@ -39,7 +39,6 @@ type SubnavLink = {
   linkText?: string
   link?: {
     href: string
-    onClick(event: MouseEvent): void
     target?: '_self' | '_blank'
   }
   subtext?: string
@@ -50,23 +49,34 @@ type SubnavGroup = {
   subnavLinks?: SubnavLink[]
 }
 
-type Link = {
+type MainLink = {
   text?: string
   subnavGroups?: SubnavGroup[]
 }
 
 type Props = {
   className?: string
-  links?: Link[]
+  darkMode?: boolean
+  logoLink?: {
+    href: string
+    target?: '_self' | '_blank'
+  }
+  mainLinks?: MainLink[]
   ctaLink?: {
     href: string
-    onClick(event: MouseEvent): void
     target?: '_self' | '_blank'
   }
   ctaText?: string
 }
 
-export function Navigation({ className, links, ctaText, ctaLink }: Props) {
+export const Navigation = forwardRef(function Navigation({
+  className,
+  darkMode = false,
+  logoLink,
+  mainLinks,
+  ctaText,
+  ctaLink,
+}: Props) {
   const { sticky, stickyRef } = useSticky()
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   useEffect(() => {
@@ -85,11 +95,13 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
         )}
       >
         <nav
-          className={`mx-auto flex h-[70px] w-full max-w-[1296px] items-center justify-between px-5 md:px-8 lg:justify-start lg:px-12 ${
-            sticky ? 'text-[#2b292d]' : 'text-white'
-          }`}
+          className={clsx(
+            'mx-auto flex h-[70px] w-full max-w-[1296px] items-center justify-between px-5 md:px-8 lg:justify-start lg:px-12',
+            darkMode ? 'text-white' : 'text-gray-900',
+            sticky && '!text-gray-900',
+          )}
         >
-          <Link href="/">
+          <Link href={logoLink?.href ?? '#'} target={logoLink?.target}>
             <svg
               width="128"
               height="30"
@@ -108,24 +120,24 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
               <g>
                 <path
                   d="M2.117 17.18a20.118 20.118 0 01-.054-.338.983.983 0 00-.404-.66 1.05 1.05 0 00-.769-.191 1.06 1.06 0 00-.683.39.99.99 0 00-.197.745c.02.13.04.261.064.391a14.565 14.565 0 001.554 4.45c.063.117.149.22.253.304a1.044 1.044 0 00.755.228 1.056 1.056 0 00.7-.355.99.99 0 00.236-.73.976.976 0 00-.114-.375 12.68 12.68 0 01-1.34-3.858zM5.009 6.224a1.066 1.066 0 00.742-.302 13.32 13.32 0 013.684-2.593.994.994 0 00.591-.965.975.975 0 00-.353-.694 1.043 1.043 0 00-.758-.242 1.06 1.06 0 00-.392.107 15.393 15.393 0 00-4.256 2.991.997.997 0 00-.292.711.973.973 0 00.313.703c.192.183.451.285.721.284zM13.08 2.187h.049a13.876 13.876 0 014.52 0 1.053 1.053 0 00.88-.246.978.978 0 00.119-1.351 1.04 1.04 0 00-.646-.373 15.96 15.96 0 00-5.247 0h-.033c-.27.046-.51.194-.667.41a.975.975 0 00-.172.748c.047.261.2.494.424.646.224.152.502.212.772.166zM3.056 7.579a1.064 1.064 0 00-.787-.071c-.261.078-.48.253-.608.487a14.543 14.543 0 00-1.639 4.838c-.039.262.03.528.194.74a1.04 1.04 0 00.83.404c.248 0 .488-.087.675-.244a.992.992 0 00.347-.612c.22-1.465.7-2.883 1.418-4.19a.976.976 0 00-.117-1.106 1.028 1.028 0 00-.313-.246zM28.6 12.815l.054.329a.991.991 0 00.346.612c.188.157.428.244.676.244.05.003.1.003.149 0a1.04 1.04 0 00.68-.391.976.976 0 00.195-.742c-.02-.126-.04-.254-.062-.38a14.664 14.664 0 00-1.56-4.462 1.005 1.005 0 00-.25-.315 1.042 1.042 0 00-.766-.243 1.06 1.06 0 00-.713.364.99.99 0 00-.226.747c.015.133.059.262.127.378a12.678 12.678 0 011.35 3.859zM24.977 24.066a13.412 13.412 0 01-3.686 2.595c-.21.1-.377.265-.477.47a.97.97 0 00-.073.654c.053.22.182.416.364.556a1.056 1.056 0 001.099.114 15.409 15.409 0 004.256-2.995.999.999 0 00.32-.719.974.974 0 00-.312-.722 1.038 1.038 0 00-.755-.283 1.064 1.064 0 00-.733.33h-.003zM22.218 1.554a1.069 1.069 0 00-.792-.055 1.028 1.028 0 00-.6.504.975.975 0 00-.055.767c.087.252.274.46.52.58a13.48 13.48 0 013.689 2.597c.191.19.453.299.727.302.274.004.538-.098.734-.284a.985.985 0 00.312-.703.983.983 0 00-.293-.71 15.526 15.526 0 00-4.242-2.998zM17.617 27.812a13.841 13.841 0 01-4.557 0 1.06 1.06 0 00-.772.167.998.998 0 00-.424.646.975.975 0 00.172.747c.157.217.397.365.667.41 1.737.29 3.512.29 5.25 0h.037a1.049 1.049 0 00.664-.41.98.98 0 00.169-.745 1.007 1.007 0 00-.43-.648 1.07 1.07 0 00-.776-.167zM9.407 26.645a13.513 13.513 0 01-3.686-2.6 1.05 1.05 0 00-.727-.301 1.052 1.052 0 00-.735.283.985.985 0 00-.312.704.983.983 0 00.294.71 15.573 15.573 0 004.256 2.996 1.055 1.055 0 001.139-.146 1 1 0 00.244-.312.97.97 0 00.048-.761 1.011 1.011 0 00-.52-.573zM29.825 16.018a1.064 1.064 0 00-.774.183 1.01 1.01 0 00-.273.291.977.977 0 00-.136.37 12.644 12.644 0 01-1.418 4.193.971.971 0 00-.075.762c.081.254.263.466.505.59.242.124.526.15.788.072s.481-.254.61-.488a14.68 14.68 0 001.633-4.84.978.978 0 00-.19-.737 1.042 1.042 0 00-.67-.396zM9.08 8.366a9.363 9.363 0 015.233-2.311 9.648 9.648 0 012.088 0c.273.03.547-.046.761-.21a.978.978 0 00.167-1.406 1.043 1.043 0 00-.691-.373 11.76 11.76 0 00-2.554 0A11.442 11.442 0 007.686 6.89a.988.988 0 00-.334.695.982.982 0 00.272.72c.186.195.444.31.718.322.274.01.542-.084.743-.263l-.004.002zM15.351 26.005c.431 0 .861-.024 1.29-.071h.02a1.058 1.058 0 00.709-.365.99.99 0 00.225-.746.977.977 0 00-.127-.377 1.01 1.01 0 00-.267-.3 1.049 1.049 0 00-.776-.199h-.017a9.58 9.58 0 01-3.924-.383 9.36 9.36 0 01-3.406-1.926 1.037 1.037 0 00-.751-.285 1.063 1.063 0 00-.735.325.994.994 0 00-.268.738.975.975 0 00.362.698 11.562 11.562 0 007.665 2.89zM19.932 7.165A9.215 9.215 0 0122.875 9.7a8.865 8.865 0 011.594 3.489.998.998 0 00.359.574 1.057 1.057 0 00.861.206c.269-.053.504-.208.655-.43a.974.974 0 00.15-.75 10.812 10.812 0 00-1.946-4.265 11.238 11.238 0 00-3.597-3.1 1.056 1.056 0 00-.795-.11 1.047 1.047 0 00-.368.175.978.978 0 00.144 1.675zM6.395 9.95a1.067 1.067 0 00-.79-.027c-.257.093-.465.28-.58.52a10.583 10.583 0 00-.95 5.793 10.71 10.71 0 00.946 3.322c.056.12.136.229.236.319a1.046 1.046 0 00.744.27 1.068 1.068 0 00.724-.317 1 1 0 00.28-.72.979.979 0 00-.093-.382A8.734 8.734 0 016.075 15c0-1.286.286-2.557.837-3.727a.973.973 0 00-.188-1.098 1.034 1.034 0 00-.33-.227zM26.493 17.183a.969.969 0 00-.15-.752 1.017 1.017 0 00-.284-.278 1.054 1.054 0 00-.776-.153 1.053 1.053 0 00-.66.422.984.984 0 00-.156.36 8.879 8.879 0 01-1.585 3.495 9.227 9.227 0 01-2.936 2.547 1.01 1.01 0 00-.445.481.967.967 0 00-.046.644.996.996 0 00.37.536c.18.135.403.207.631.206.18 0 .356-.044.511-.13a11.274 11.274 0 003.588-3.11 10.85 10.85 0 001.938-4.268zM22.59 15.16a6.832 6.832 0 00-1.125-3.916 7.172 7.172 0 00-3.183-2.652 7.454 7.454 0 00-4.168-.493 7.324 7.324 0 00-3.75 1.832A6.946 6.946 0 008.3 13.47a6.788 6.788 0 00.314 4.053 7.04 7.04 0 002.588 3.2 7.396 7.396 0 003.99 1.27h.172a7.363 7.363 0 005.05-1.995 6.898 6.898 0 002.176-4.84v.002zm-7.35 4.835a5.279 5.279 0 01-2.85-.904 5.024 5.024 0 01-1.85-2.287 4.845 4.845 0 01-.224-2.895 4.959 4.959 0 011.48-2.527 5.23 5.23 0 012.675-1.306 5.323 5.323 0 012.976.351 5.123 5.123 0 012.272 1.891 4.88 4.88 0 01.806 2.794 4.93 4.93 0 01-1.598 3.5 5.265 5.265 0 01-3.687 1.383z"
-                  className={`${sticky ? 'fill-[#3333FF]' : 'fill-white'}`}
+                  className={`${sticky ? 'fill-blue-100' : 'fill-white'}`}
                 ></path>
               </g>
             </svg>
           </Link>
 
-          <div className="mx-8 hidden h-5 border-r border-[#ededf0] lg:block" />
+          <div className="mx-8 hidden h-5 border-r border-gray-200 lg:block" />
 
           <NavigationMenu.Root className="z-[1] hidden flex-1 lg:flex">
             <NavigationMenu.List className="flex gap-8">
-              {links?.map((link, i) => (
+              {mainLinks?.map((mainLink, i) => (
                 <NavigationMenu.Item key={i} className="relative">
                   <NavigationMenu.Trigger
                     className={`${
-                      sticky ? 'hover:text-[#3333ff]' : ''
-                    } group flex select-none items-center gap-[6px] py-5 text-sm font-bold leading-none text-current outline-none`}
+                      sticky ? 'hover:text-blue-100' : ''
+                    } group flex select-none items-center gap-1.5 py-5 text-sm font-bold leading-none text-current outline-none`}
                   >
-                    {link.text}{' '}
+                    {mainLink.text}{' '}
                     <svg
                       viewBox="0 0 7 5"
                       fill="none"
@@ -144,17 +156,17 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                     forceMount
                     className="absolute -left-16 top-full flex w-full overflow-hidden rounded-xl bg-white shadow-md transition-opacity data-[state=closed]:opacity-0 data-[state=open]:opacity-100 sm:w-auto"
                   >
-                    {link.subnavGroups?.map((subnavGroup, i) => (
-                      <ul key={i} className="w-[280px] border-r border-[#f4f4f4]">
-                        <li className="px-6 pb-2 pt-6 text-[10px] font-bold uppercase tracking-widest text-[#535f6e]">
+                    {mainLink.subnavGroups?.map((subnavGroup, i) => (
+                      <ul key={i} className="w-72 border-r border-gray-100">
+                        <li className="px-6 pb-2 pt-6 text-xxs font-bold uppercase tracking-widest text-gray-700">
                           {subnavGroup.heading}
                         </li>
                         {subnavGroup.subnavLinks?.map((subnavLink, i) => (
                           <li key={i}>
                             <NavigationMenu.Link asChild>
                               <a
-                                className="group flex w-full cursor-pointer select-none items-start gap-x-4 px-6 py-2 outline-none transition-colors hover:bg-[#f5f5ff]"
-                                {...link}
+                                className="group flex w-full cursor-pointer select-none items-start gap-x-4 px-6 py-2 outline-none transition-colors hover:bg-gray-100"
+                                {...mainLink}
                               >
                                 {subnavLink?.icon && (
                                   <Image
@@ -166,12 +178,12 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                                 )}
 
                                 <div className="flex-1 tracking-wide">
-                                  <p className="text-[18px] font-bold leading-[1.5] text-[#515151] group-hover:text-[#3333ff]">
+                                  <p className="text-[18px] font-bold leading-normal text-gray-700 group-hover:text-blue-100">
                                     {subnavLink.linkText}
                                   </p>
 
                                   {subnavLink.subtext && (
-                                    <p className="leading-[1.5] text-[#717171] group-hover:text-[#3333ff]">
+                                    <p className="leading-normal text-gray-400 group-hover:text-blue-100">
                                       {subnavLink.subtext}
                                     </p>
                                   )}
@@ -192,7 +204,7 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
             <li>
               <Link
                 href="https://docs.transcend.io/docs"
-                className={`${sticky ? 'hover:text-[#3333ff]' : ''} `}
+                className={`${sticky ? 'hover:text-blue-100' : ''} `}
               >
                 Docs
               </Link>
@@ -200,30 +212,32 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
             <li>
               <Link
                 href="https://app.transcend.io/login"
-                className={`${sticky ? 'hover:text-[#3333ff]' : ''} `}
+                className={`${sticky ? 'hover:text-blue-100' : ''} `}
               >
                 Log In
               </Link>
             </li>
-            {ctaText ? (
+            {ctaText && (
               <li>
-                <a
-                  {...ctaLink}
-                  className={`rounded-lg border border-current px-5 py-2.5 text-center tracking-wider transition-colors ${
+                <Link
+                  href={ctaLink?.href ?? '#'}
+                  target={ctaLink?.target}
+                  className={clsx(
+                    'rounded-lg border border-current px-5 py-2.5 text-center tracking-wider transition-colors',
                     sticky
                       ? 'hover:text-current'
-                      : 'hover:border-white hover:bg-white hover:text-[#3333ff]'
-                  } `}
+                      : 'hover:border-white hover:bg-white hover:text-blue-100',
+                  )}
                 >
                   {ctaText}
-                </a>
+                </Link>
               </li>
-            ) : null}
+            )}
           </ul>
 
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className={`block w-7 lg:hidden ${sticky ? 'text-[#2b292d]' : 'text-white'}`}
+            className={`block w-7 lg:hidden ${sticky ? 'text-gray-900' : 'text-white'}`}
           >
             <svg
               viewBox="0 0 26 24"
@@ -243,17 +257,18 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
         </nav>
 
         <nav
-          className={`flex-1 flex-col overflow-auto bg-white py-8 ${
-            mobileNavOpen ? 'flex' : 'hidden'
-          }`}
+          className={clsx(
+            'flex-1 flex-col overflow-auto bg-white py-8',
+            mobileNavOpen ? 'flex' : 'hidden',
+          )}
         >
           <Accordion.Root type="multiple" className="flex-1" asChild>
-            <ul className="text-[18px] font-bold">
-              {links?.map((link, i) => (
+            <ul className="text-lg font-bold">
+              {mainLinks?.map((mainLink, i) => (
                 <Accordion.Item value={'item' + i} key={i} asChild>
                   <li>
                     <Accordion.Trigger className="group flex w-full items-center gap-2 px-6 py-5 text-left">
-                      {link.text}{' '}
+                      {mainLink.text}{' '}
                       <svg
                         viewBox="0 0 7 5"
                         fill="none"
@@ -268,12 +283,12 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                       </svg>
                     </Accordion.Trigger>
 
-                    {link.subnavGroups?.length && (
+                    {mainLink.subnavGroups?.length && (
                       <Accordion.AccordionContent className="space-y-8 px-10 pb-8 pt-5">
-                        {link.subnavGroups?.map((subnavGroup, i) => (
-                          <ul key={i} className="border-b border-[#eeeeee] pb-2">
+                        {mainLink.subnavGroups?.map((subnavGroup, i) => (
+                          <ul key={i} className="border-b border-gray-200 pb-2">
                             {subnavGroup.heading && (
-                              <li className="pb-2 text-[10px] font-bold uppercase tracking-widest text-[#535f6e]">
+                              <li className="pb-2 text-xxs font-bold uppercase tracking-widest text-gray-700">
                                 {subnavGroup.heading}
                               </li>
                             )}
@@ -281,8 +296,8 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                             {subnavGroup.subnavLinks?.map((subnavLink, i) => (
                               <li key={i}>
                                 <a
-                                  className="group flex w-full cursor-pointer select-none items-center gap-x-4 py-2 outline-none transition-colors hover:bg-[#f5f5ff]"
-                                  {...link}
+                                  className="group flex w-full cursor-pointer select-none items-center gap-x-4 py-2 outline-none transition-colors hover:bg-gray-100"
+                                  {...mainLink}
                                 >
                                   {subnavLink.icon && (
                                     <Image
@@ -294,12 +309,12 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                                   )}
 
                                   <div className="flex-1 tracking-wide">
-                                    <p className="text-[16px] font-bold leading-[1.5] text-[#515151] group-hover:text-[#3333ff]">
+                                    <p className="text-base font-bold leading-normal text-gray-700 group-hover:text-blue-100">
                                       {subnavLink.linkText}
                                     </p>
 
                                     {subnavLink.subtext && (
-                                      <p className="text-[14px] font-normal leading-[1.5] text-[#717171] group-hover:text-[#3333ff]">
+                                      <p className="text-sm font-normal leading-normal text-gray-400 group-hover:text-blue-100">
                                         {subnavLink.subtext}
                                       </p>
                                     )}
@@ -324,20 +339,21 @@ export function Navigation({ className, links, ctaText, ctaLink }: Props) {
                   Log In
                 </Link>
               </li>
-              {ctaText ? (
+              {ctaText && (
                 <li className="w-full px-6 py-5 text-center">
-                  <a
-                    {...ctaLink}
+                  <Link
+                    href={ctaLink?.href ?? '#'}
+                    target={ctaLink?.target}
                     className="rounded-lg border border-current px-5 py-2.5 text-center tracking-wider transition-colors"
                   >
                     {ctaText}
-                  </a>
+                  </Link>
                 </li>
-              ) : null}
+              )}
             </ul>
           </Accordion.Root>
         </nav>
       </header>
     </>
   )
-}
+})
