@@ -13,7 +13,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult<ParsedUrlQu
 
   return {
     paths: pages
-      .filter(page => page.path !== '/integrations')
+      .filter(page => ['/integrations', '/blog'].includes(page.path) === false)
       .map(page => ({
         params: {
           path: page.path.split('/').filter(segment => segment !== ''),
