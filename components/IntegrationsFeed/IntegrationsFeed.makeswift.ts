@@ -12,7 +12,7 @@ ReactRuntime.registerComponent(
   ),
   {
     type: 'IntegrationsFeed',
-    label: 'Feeds/Integrations Feed',
+    label: 'Integrations/Feed',
     props: {
       className: Style(),
     },

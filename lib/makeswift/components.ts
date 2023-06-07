@@ -1,4 +1,6 @@
+import '@/components/BlogCategories/BlogCategories.makeswift'
 import '@/components/BlogFeed/BlogFeed.makeswift'
+import '@/components/BlogSearch/BlogSearch.makeswift'
 import '@/components/Carousel/Carousel.makeswift'
 import '@/components/Headroom/Headroom.makeswift'
 import '@/components/IntegrationsFeed/IntegrationsFeed.makeswift'

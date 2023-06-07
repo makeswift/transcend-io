@@ -10,7 +10,7 @@ ReactRuntime.registerComponent(
   ),
   {
     type: 'BlogSearch',
-    label: 'Blog Feed',
+    label: 'Blog/Search',
     props: {
       className: Style(),
     },

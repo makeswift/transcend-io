@@ -17,21 +17,14 @@ export const BlogFeed = forwardRef(function BlogFeed(
   { className }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
-  const [query, setQuery] = useState('')
   const [{ limit, skip }, setParams] = useState(DEFAULT_FEED_PARAMS)
   const [filter, setFilter] = useState<PostModelFilter | undefined>()
-  const { data: blogPostData, isLoading } = useSWR(
-    getCacheKey('blog', { limit, skip, filter }),
-    () => request(BlogPostsDocument, { limit, skip, filter }),
+  const { data, isLoading } = useSWR(getCacheKey('blog', { limit, skip, filter }), () =>
+    request(BlogPostsDocument, { limit, skip, filter }),
   )
-  const { data: categoryData } = useSWR(getCacheKey('category'), () => request(CategoriesDocument))
-  const total = blogPostData?._allPostsMeta.count ?? 0
+  const total = data?._allPostsMeta.count ?? 0
 
-  const [pages, setPages] = useState(
-    blogPostData ? [...Array.from({ length: total / limit }).keys()] : [],
-  )
-
-  console.log({ categoryData, blogPostData })
+  const [pages, setPages] = useState(data ? [...Array.from({ length: total / limit }).keys()] : [])
 
   useEffect(() => {
     if (!total) return
@@ -43,15 +36,7 @@ export const BlogFeed = forwardRef(function BlogFeed(
 
   return (
     <div className={clsx(className, 'relative flex flex-col gap-4')} ref={ref}>
-      <BlogSearch />
-      <div className="flex gap-4">
-        {categoryData?.allCategories.map(category => (
-          <Link key={category.id} href={`/blog${category.path}`}>
-            {category.name}
-          </Link>
-        ))}
-      </div>
-      {blogPostData?.allPosts.map(post => (
+      {data?.allPosts.map(post => (
         <div key={post.id}>{post.title}</div>
       ))}
     </div>
