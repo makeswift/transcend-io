@@ -27,6 +27,15 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-neue-haas-grotesk)'],
+        code: [
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          '"Andale Mono"',
+          '"Ubuntu Mono"',
+          '"Courier New"',
+          'monospace',
+        ],
       },
       fontSize: {
         xxs: ['.625rem', { lineHeight: '1.6' }],
