@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CSSProperties, ReactNode, Ref, forwardRef } from 'react'
+import { ReactNode, Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
@@ -26,7 +26,6 @@ type ButtonProps = {
   size?: 'medium' | 'large'
   variant?: 'filled' | 'outlined'
   color?: 'blue' | 'gray' | 'white'
-  textColor?: string
   showIcon?: boolean
   className?: string
 }
@@ -38,7 +37,7 @@ export const Button = forwardRef(function Button(
     size = 'large',
     variant = 'filled',
     color = 'blue',
-    textColor = 'var(--white)',
+    showIcon = false,
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>,
 ) {
@@ -51,12 +50,11 @@ export const Button = forwardRef(function Button(
         className,
         BUTTON_VARIANT_STYLES[buttonConfig],
         SIZE_STYLES[size],
-        'group rounded-lg border text-sm font-bold leading-none text-[var(--text-color)] transition duration-150',
+        'group inline-flex items-center gap-3 rounded-lg border text-sm font-bold leading-none transition duration-150',
       )}
-      style={{ '--color': color, '--text-color': textColor } as CSSProperties}
     >
       {children}
-      {/* <ChevronRight className="text-gray-400" /> */}
+      {showIcon && <ChevronRight />}
     </button>
   )
 })

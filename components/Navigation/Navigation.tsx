@@ -6,6 +6,8 @@ import * as Accordion from '@radix-ui/react-accordion'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import clsx from 'clsx'
 
+import { LinkButton } from '../Button'
+
 const useSticky = () => {
   const stickyRef = useRef<HTMLDivElement | null>(null)
   const [sticky, setSticky] = useState(false)
@@ -234,18 +236,15 @@ export function Navigation({
 
             {ctaText && (
               <li>
-                <Link
-                  href={ctaLink?.href ?? '#'}
-                  target={ctaLink?.target}
-                  className={clsx(
-                    'rounded-lg border border-current px-5 py-2.5 text-center tracking-wider transition-colors',
-                    sticky
-                      ? 'hover:text-current'
-                      : 'hover:border-white hover:bg-white hover:text-blue-100',
-                  )}
+                <LinkButton
+                  link={ctaLink}
+                  size="medium"
+                  variant="outlined"
+                  color={darkMode && !sticky ? 'white' : 'gray'}
+                  showIcon={false}
                 >
                   {ctaText}
-                </Link>
+                </LinkButton>
               </li>
             )}
           </ul>

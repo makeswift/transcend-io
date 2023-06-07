@@ -41,11 +41,7 @@ runtime.registerComponent(
         ],
         defaultValue: 'blue',
       }),
-      textColor: Color({
-        label: 'Text color',
-        defaultValue: '#000000',
-      }),
-      showIcon: Checkbox({ label: 'Show icon', defaultValue: true }),
+      showIcon: Checkbox({ label: 'Show icon', defaultValue: false }),
       className: Style({ properties: [Style.Margin] }),
     },
   },
