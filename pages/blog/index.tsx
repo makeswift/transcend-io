@@ -4,7 +4,11 @@ import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswi
 import { SWRConfig } from 'swr'
 
 import { DEFAULT_PARAMS } from '@/components/BlogFeed'
-import { BlogCategoriesDocument, BlogFeedDocument } from '@/generated/dato'
+import {
+  BlogCategoriesDocument,
+  BlogFeaturedPostDocument,
+  BlogFeedDocument,
+} from '@/generated/dato'
 import { client } from '@/lib/dato/client'
 import { client as MakeswiftClient } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
@@ -30,6 +34,7 @@ export async function getStaticProps({
           DEFAULT_PARAMS,
         ),
         [getCacheKey('blog/categories')]: await client.request(BlogCategoriesDocument),
+        [getCacheKey('blog/featured')]: await client.request(BlogFeaturedPostDocument),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,
