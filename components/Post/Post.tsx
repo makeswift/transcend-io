@@ -8,11 +8,11 @@ type Props = {
   link?: { href: string; target?: '_blank' | '_self' }
   orientation?: 'horizontal' | 'vertical'
   slug?: string
-  preHeading?: string
+  preHeading?: string | null
   heading?: string
   body?: string
-  date?: string
-  readTime?: number
+  date?: string | null
+  readTime?: number | null
   image?: React.ReactNode
 }
 
@@ -25,7 +25,7 @@ export const Post = forwardRef(function Post(
     preHeading = 'Featured Post',
     heading = 'How to make a website.',
     body = "Learn how to make a website with this easy to follow tutorial. We'll walk you through step by step.",
-    date = '5/31/23',
+    date,
     readTime = 5,
   }: Props,
   ref: Ref<HTMLAnchorElement>,
@@ -37,10 +37,10 @@ export const Post = forwardRef(function Post(
       target={link?.target}
       className={clsx(
         className,
-        'group grid grid-cols-12',
+        'group',
         {
-          horizontal: 'gap-y-5 md:gap-x-5 md:gap-y-0',
-          vertical: 'gap-y-5',
+          horizontal: 'grid grid-cols-12 gap-y-5 md:gap-x-16 md:gap-y-0',
+          vertical: 'space-y-5',
         }[orientation],
       )}
     >
@@ -48,8 +48,8 @@ export const Post = forwardRef(function Post(
         className={clsx(
           'relative',
           {
-            horizontal: 'col-span-12 md:col-span-6',
-            vertical: 'col-span-12',
+            horizontal: 'col-span-12 h-[300px] md:col-span-6 md:h-[400px]',
+            vertical: 'col-span-12 h-[250px]',
           }[orientation],
         )}
       >
@@ -57,7 +57,7 @@ export const Post = forwardRef(function Post(
       </div>
       <div
         className={clsx(
-          'space-y-5',
+          'space-y-5 py-5',
           {
             horizontal: 'col-span-12 md:col-span-6',
             vertical: 'col-span-12',
@@ -74,7 +74,7 @@ export const Post = forwardRef(function Post(
               day: 'numeric',
               year: 'numeric',
             })} • `}
-          {readTime} min read
+          {readTime && `${readTime} min read`}
         </p>
       </div>
     </Link>

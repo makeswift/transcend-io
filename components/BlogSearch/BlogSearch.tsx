@@ -53,7 +53,7 @@ export const BlogSearch = forwardRef(function BlogSearch(
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
           placeholder={placeholder}
         />
-        <Combobox.Button className="search-button">
+        <Combobox.Button className="search-icon">
           {isLoading ? (
             <Spinner className="text-gray-400" aria-hidden="true" />
           ) : (
