@@ -32,6 +32,9 @@ export function getIntegrations({
     skip,
     include: 10,
     order,
+    'fields.logoSquare': { exists: true },
     ...(filter ? { 'fields.title[match]': filter } : {}),
   })
 }
+
+export const DEFAULT_PARAMS = { limit: 20, skip: 0 }

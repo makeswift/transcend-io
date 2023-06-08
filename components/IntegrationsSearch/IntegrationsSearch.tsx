@@ -3,12 +3,13 @@ import { Ref, forwardRef, useMemo, useState } from 'react'
 
 import { Combobox } from '@headlessui/react'
 import clsx from 'clsx'
+import { ContentfulCollection } from 'contentful'
 import debounce from 'lodash.debounce'
 import useSWR from 'swr'
 
-import { BlogSearchDocument, PostModelFilter, PostRecord } from '@/generated/dato'
+import { Spinner } from '@/components/Spinner'
+import { IIntegration } from '@/generated/contentful'
 import { Search } from '@/generated/icons'
-import { client } from '@/lib/dato/client'
 import { getCacheKey } from '@/lib/utils'
 
 type Props = {
@@ -18,21 +19,20 @@ type Props = {
   hideLabel?: boolean
 }
 
-export const BlogSearch = forwardRef(function BlogSearch(
+export const DEFAULT_PARAMS = { limit: 10, filter: '', order: 'fields.title' }
+
+export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
   { className, label = 'Search', placeholder = 'Search', hideLabel }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
   const router = useRouter()
-  const [filter, setFilter] = useState<PostModelFilter | undefined>()
-  const { data, isLoading } = useSWR(filter && getCacheKey('blog/search', { filter }), () =>
-    client.request(BlogSearchDocument, { filter }),
+  const [{ filter, limit, order }, setFilter] = useState(DEFAULT_PARAMS)
+  const { data, isLoading } = useSWR(
+    filter && getCacheKey('integrations/search', { filter, limit, order }),
+    () => fetchIntegrationsSearch({ filter, limit, order }),
   )
   const debouncedSetFilter = useMemo(
-    () =>
-      debounce(
-        (pattern: string) => setFilter({ title: { matches: { pattern, caseSensitive: false } } }),
-        200,
-      ),
+    () => debounce((pattern: string) => setFilter(prev => ({ ...prev, filter: pattern })), 200),
     [],
   )
 
@@ -41,7 +41,7 @@ export const BlogSearch = forwardRef(function BlogSearch(
       ref={ref}
       as="div"
       className={className}
-      onChange={(item: PostRecord) => router.push(`/blog/${item.slug}`)}
+      onChange={(item: IIntegration) => router.push(`/integrations/#`)}
     >
       <Combobox.Label className="label text-xl font-bold" hidden={hideLabel}>
         {label}
@@ -52,19 +52,23 @@ export const BlogSearch = forwardRef(function BlogSearch(
             'placeholder:text-md focus:border-indigo-500 focus:ring-indigo-500 flex h-10 w-full items-center rounded-full border border-black border-opacity-20 bg-white px-4 pr-10 text-lg shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 sm:text-sm',
           )}
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
-          displayValue={(item: PostRecord) => item.title}
+          displayValue={(item: IIntegration) => item.fields.title ?? 'Untitled'}
           placeholder={placeholder}
         />
         <Combobox.Button className="absolute inset-y-0 right-3 flex items-center focus:outline-none">
-          <Search className="text-gray-400" aria-hidden="true" />
+          {isLoading ? (
+            <Spinner className="text-gray-400" aria-hidden="true" />
+          ) : (
+            <Search className="text-gray-400" aria-hidden="true" />
+          )}
         </Combobox.Button>
         {!isLoading && (
           <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {data && data.allPosts.length > 0 ? (
-              data.allPosts.map(post => (
+            {data && data.items.length > 0 ? (
+              data.items.map(item => (
                 <Combobox.Option
-                  key={post.id}
-                  value={post}
+                  key={item.sys.id}
+                  value={item}
                   className={({ active }) =>
                     clsx(
                       'relative flex cursor-pointer select-none py-2 pl-3 pr-9',
@@ -74,7 +78,7 @@ export const BlogSearch = forwardRef(function BlogSearch(
                 >
                   {({ selected }) => (
                     <span className={clsx('block truncate', selected && 'font-semibold')}>
-                      {post.title}
+                      {item.fields.title}
                     </span>
                   )}
                 </Combobox.Option>
@@ -88,3 +92,26 @@ export const BlogSearch = forwardRef(function BlogSearch(
     </Combobox>
   )
 })
+
+export async function fetchIntegrationsSearch({ limit, filter, order } = DEFAULT_PARAMS): Promise<
+  ContentfulCollection<IIntegration>
+> {
+  try {
+    const results = await fetch(
+      '/api/contentful/integrations?' +
+        new URLSearchParams({
+          limit: limit.toString(),
+          filter,
+          order,
+        }),
+    ).then(r => r.json())
+
+    if (results.error) {
+      throw new Error('Failed to fetch Integrations\n' + JSON.stringify(results.error, null, 2))
+    }
+
+    return results
+  } catch (e: any) {
+    throw new Error(e)
+  }
+}

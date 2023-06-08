@@ -3,11 +3,12 @@ import { GetStaticPropsContext } from 'next/types'
 import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswift/runtime/next'
 import { SWRConfig } from 'swr'
 
+import { DEFAULT_PARAMS } from '@/components/IntegrationsFeed'
 import { getIntegrations } from '@/lib/contentful/client'
 import { client } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
 import { runtime } from '@/lib/makeswift/runtime'
-import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
+import { getCacheKey } from '@/lib/utils'
 
 export async function getStaticProps({
   previewData,
@@ -23,9 +24,7 @@ export async function getStaticProps({
     props: {
       snapshot,
       fallback: {
-        [getCacheKey('integrations', DEFAULT_FEED_PARAMS)]: await getIntegrations(
-          DEFAULT_FEED_PARAMS,
-        ),
+        [getCacheKey('integrations/feed', DEFAULT_PARAMS)]: await getIntegrations(DEFAULT_PARAMS),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,
@@ -36,7 +35,7 @@ export async function getStaticProps({
 
 type Props = { fallback: { [key: string]: any } } & MakeswiftPageProps
 
-export default function Page({ snapshot, fallback }: Props) {
+export default function Integrations({ snapshot, fallback }: Props) {
   return (
     <SWRConfig value={{ fallback }}>
       <MakeswiftPage snapshot={snapshot} runtime={runtime} />

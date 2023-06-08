@@ -7,11 +7,13 @@ import { runtime } from '@/lib/makeswift/runtime'
 
 runtime.registerComponent(
   forwardNextDynamicRef(patch =>
-    dynamic(() => patch(import('./BlogSearch').then(({ BlogSearch }) => BlogSearch))),
+    dynamic(() =>
+      patch(import('./IntegrationsSearch').then(({ IntegrationsSearch }) => IntegrationsSearch)),
+    ),
   ),
   {
-    type: 'BlogSearch',
-    label: 'Blog/Search',
+    type: 'IntegrationsSearch',
+    label: 'Integrations/Search',
     props: {
       className: Style(),
       label: TextInput({ label: 'Label', defaultValue: 'Search' }),
