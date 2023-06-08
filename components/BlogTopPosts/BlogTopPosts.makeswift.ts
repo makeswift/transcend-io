@@ -11,7 +11,7 @@ runtime.registerComponent(
   ),
   {
     type: 'BlogTopPosts',
-    label: 'BlogTopPosts',
+    label: 'Blog/TopPosts',
     props: {
       className: Style(),
     },
