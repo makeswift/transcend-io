@@ -8,6 +8,7 @@ import {
   BlogCategoriesDocument,
   BlogFeaturedPostDocument,
   BlogFeedDocument,
+  BlogTopPostsDocument,
 } from '@/generated/dato'
 import { client } from '@/lib/dato/client'
 import { client as MakeswiftClient } from '@/lib/makeswift/client'
@@ -35,6 +36,7 @@ export async function getStaticProps({
         ),
         [getCacheKey('blog/categories')]: await client.request(BlogCategoriesDocument),
         [getCacheKey('blog/featured')]: await client.request(BlogFeaturedPostDocument),
+        [getCacheKey('blog/top-posts')]: await client.request(BlogTopPostsDocument),
       },
       previewData: previewData?.makeswift == true,
       preview: preview ?? false,

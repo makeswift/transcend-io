@@ -8,7 +8,7 @@ type Props = {
   link?: { href: string; target?: '_blank' | '_self' }
   orientation?: 'horizontal' | 'vertical'
   slug?: string
-  preHeading?: string
+  preHeading?: string | null
   heading?: string
   body?: string
   date?: string | null
@@ -37,10 +37,10 @@ export const Post = forwardRef(function Post(
       target={link?.target}
       className={clsx(
         className,
-        'group grid grid-cols-12',
+        'group',
         {
-          horizontal: 'gap-y-5 md:gap-x-16 md:gap-y-0',
-          vertical: 'gap-y-5',
+          horizontal: 'grid grid-cols-12 gap-y-5 md:gap-x-16 md:gap-y-0',
+          vertical: 'space-y-5',
         }[orientation],
       )}
     >
