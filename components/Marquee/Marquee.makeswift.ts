@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Color, Image, List, Number, Shape, Style, TextInput } from '@makeswift/runtime/controls'
+import { Checkbox, Image, List, Number, Shape, Style, TextInput } from '@makeswift/runtime/controls'
 import { forwardNextDynamicRef } from '@makeswift/runtime/next'
 
 import { runtime } from '@/lib/makeswift/runtime'
@@ -33,8 +33,13 @@ runtime.registerComponent(
           return logo?.logoAlt || 'Untitled'
         },
       }),
-      gap: Number({ label: 'Gap', defaultValue: 48 }),
-      fadeColor: Color({ label: 'Fade color', defaultValue: '#ffffff' }),
+      gap: Number({ label: 'Gap', defaultValue: 96 }),
+      duration: Number({
+        label: 'Animation duration',
+        defaultValue: 20,
+        suffix: 's',
+      }),
+      fadeEdges: Checkbox({ label: 'Fade edges', defaultValue: true }),
       className: Style(),
     },
   },

@@ -1,5 +1,7 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { CSSProperties, Ref, forwardRef } from 'react'
+
+import clsx from 'clsx'
 
 type Logo = {
   logoImage?: { url: string; dimensions: { width: number; height: number } }
@@ -11,18 +13,30 @@ type Props = {
   className?: string
   gap: number
   logos: Logo[]
-  fadeColor?: string
+  fadeEdges?: boolean
+  duration?: number
 }
 
-export function Marquee({ className, gap, logos, fadeColor }: Props) {
-  if (logos.length === 0) return <p className={className}>There are no logos</p>
+export const Marquee = forwardRef(function Marquee(
+  { className, gap = 96, logos, fadeEdges = true, duration = 120 }: Props,
+  ref: Ref<HTMLDivElement>,
+) {
+  if (!logos?.length) {
+    return (
+      <p className={clsx(className, 'text-center')} ref={ref}>
+        There are no logos
+      </p>
+    )
+  }
 
   const marqueeContainer = (
-    <div className="flex min-w-full flex-[0_0_auto] animate-[marqueeScroll_20s_linear_infinite] items-center">
+    <div
+      className="flex min-w-full flex-[0_0_auto] animate-marqueeScroll items-center"
+      style={{ columnGap: gap, paddingLeft: gap / 2, paddingRight: gap / 2 }}
+    >
       {logos.map((logo, index) => {
-        if (logo.logoImage == null) return <div key={index}></div>
-
-        const aspectRatio = logo.logoImage.dimensions.width / logo.logoImage.dimensions.height
+        if (logo.logoImage == null)
+          return <div key={index} className="h-10 w-10 rounded-full bg-gray-300" />
 
         return (
           <Image
@@ -30,8 +44,9 @@ export function Marquee({ className, gap, logos, fadeColor }: Props) {
             src={logo.logoImage.url}
             alt={logo.logoAlt}
             width={logo.logoWidth}
-            height={logo.logoWidth / aspectRatio}
-            style={{ marginLeft: gap / 2, marginRight: gap / 2 }}
+            height={
+              logo.logoWidth / (logo.logoImage.dimensions.width / logo.logoImage.dimensions.height)
+            }
           />
         )
       })}
@@ -39,23 +54,21 @@ export function Marquee({ className, gap, logos, fadeColor }: Props) {
   )
 
   return (
-    <div className={className}>
-      <div className="relative flex min-h-[40px] w-full flex-row items-center overflow-hidden">
-        <div
-          className="absolute left-0 z-10 h-full w-48"
-          style={{
-            background: `linear-gradient(to right, ${fadeColor}, transparent)`,
-          }}
-        ></div>
-        <div
-          className="absolute right-0 z-10 h-full w-48"
-          style={{
-            background: `linear-gradient(to left, ${fadeColor}, transparent)`,
-          }}
-        ></div>
+    <div
+      className={className}
+      ref={ref}
+      style={{ '--marquee-duration': `${duration}s` } as CSSProperties}
+    >
+      <div
+        className={clsx(
+          fadeEdges &&
+            '[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)] [mask-image:linear-gradient(to_right,transparent_0%,black_15%,black_85%,transparent_100%)]',
+          'relative flex min-h-[40px] w-full flex-row items-center overflow-hidden',
+        )}
+      >
         {marqueeContainer}
         {marqueeContainer}
       </div>
     </div>
   )
-}
+})

@@ -52,6 +52,7 @@ module.exports = {
       },
       animation: {
         fadeIn: 'fadeIn 200ms',
+        marqueeScroll: 'marqueeScroll var(--marquee-duration) linear infinite',
       },
     },
   },
