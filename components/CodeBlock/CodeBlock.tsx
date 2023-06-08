@@ -25,7 +25,7 @@ export const CodeBlock = forwardRef(function CodeBlock(
   return (
     <code
       ref={ref}
-      className={clsx('hljs language-tsx text-code !p-6 text-sm', className)}
+      className={clsx('hljs language-tsx !p-6 font-code text-sm', className)}
       dangerouslySetInnerHTML={{ __html: highlighted }}
     />
   )
