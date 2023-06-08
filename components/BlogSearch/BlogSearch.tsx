@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import debounce from 'lodash.debounce'
 import useSWR from 'swr'
 
+import { Spinner } from '@/components/Spinner'
 import { BlogSearchDocument, PostModelFilter, PostRecord } from '@/generated/dato'
 import { Search } from '@/generated/icons'
 import { client } from '@/lib/dato/client'
@@ -56,7 +57,11 @@ export const BlogSearch = forwardRef(function BlogSearch(
           placeholder={placeholder}
         />
         <Combobox.Button className="absolute inset-y-0 right-3 flex items-center focus:outline-none">
-          <Search className="text-gray-400" aria-hidden="true" />
+          {isLoading ? (
+            <Spinner className="text-gray-400" aria-hidden="true" />
+          ) : (
+            <Search className="text-gray-400" aria-hidden="true" />
+          )}
         </Combobox.Button>
         {!isLoading && (
           <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
