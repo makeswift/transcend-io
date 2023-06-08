@@ -7,7 +7,6 @@ import { getIntegrations } from '@/lib/contentful/client'
 const params = z.object({
   skip: z.string().optional(),
   limit: z.string().optional(),
-  order: z.string().optional(),
   filter: z.string().optional(),
 })
 
@@ -18,9 +17,9 @@ export default async function contentfulIntegrations(
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method Not Allowed' })
 
   try {
-    const { skip = 0, limit = 8, order, filter } = params.parse(req.query)
+    const { skip = 0, limit = 8, filter } = params.parse(req.query)
 
-    const results = await getIntegrations({ skip, limit, order, filter })
+    const results = await getIntegrations({ skip, limit, filter })
 
     res.json(results)
   } catch (e: any) {
