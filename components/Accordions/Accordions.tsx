@@ -31,8 +31,8 @@ export function Accordions({ className, accordions }: Props) {
           <Accordion.Item key={i} value={`${i + 1}`} asChild>
             <li className="group rounded-xl bg-white py-5 shadow-2xl shadow-black/10">
               <Accordion.Header>
-                <Accordion.Trigger className="flex w-full items-center gap-x-4 px-10">
-                  <div className="flex-1 py-5 text-left text-lg font-bold leading-normal text-gray-900">
+                <Accordion.Trigger className="flex w-full items-center gap-x-4 px-5 md:px-10">
+                  <div className="text-md flex-1 py-5 text-left font-bold leading-normal text-gray-900 md:text-lg">
                     {accordion.title}
                   </div>
 
@@ -51,8 +51,10 @@ export function Accordions({ className, accordions }: Props) {
                 </Accordion.Trigger>
               </Accordion.Header>
 
-              <Accordion.Content className="text-md w-full overflow-hidden leading-relaxed text-black data-[state=closed]:animate-accordionSlideUp data-[state=open]:animate-accordionSlideDown">
-                <div className="px-10 pb-3">{accordion.children}</div>
+              <Accordion.Content className="w-full overflow-hidden data-[state=closed]:animate-accordionSlideUp data-[state=open]:animate-accordionSlideDown">
+                <div className="text-md px-5 pb-1 leading-relaxed text-gray-900 md:px-10 md:pb-3">
+                  {accordion.children}
+                </div>
               </Accordion.Content>
             </li>
           </Accordion.Item>
