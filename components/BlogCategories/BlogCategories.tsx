@@ -21,12 +21,12 @@ export const BlogCategories = forwardRef(function BlogCategories(
   )
 
   return (
-    <div className={clsx(className, 'relative flex gap-4')} ref={ref}>
+    <div className={clsx(className, 'flex flex-wrap gap-x-2 gap-y-3 text-center')} ref={ref}>
       {categoryData?.allCategories.map(category => (
         <Link
           key={category.id}
           href={`/blog${category.path}`}
-          className="rounded-full bg-gray-200 px-3 py-2 text-xs font-bold text-gray-500 hover:bg-gray-300"
+          className="rounded-full bg-gray-200 px-4 py-2 text-xs font-bold text-gray-500 ring-1 ring-transparent transition-colors hover:bg-white hover:text-blue-100 hover:ring-gray-200"
         >
           {category.name}
         </Link>

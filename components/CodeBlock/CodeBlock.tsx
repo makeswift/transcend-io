@@ -23,7 +23,7 @@ export const CodeBlock = forwardRef(function CodeBlock(
   return (
     <pre
       ref={ref}
-      className={clsx('language-js', className)}
+      className={clsx('language-js min-h-[40px] tracking-normal', className)}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

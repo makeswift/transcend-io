@@ -40,7 +40,7 @@ export async function getStaticProps({
 
 type Props = { fallback: { [key: string]: any } } & MakeswiftPageProps
 
-export default function Page({ snapshot, fallback }: Props) {
+export default function Blog({ snapshot, fallback }: Props) {
   return (
     <SWRConfig value={{ fallback }}>
       <MakeswiftPage snapshot={snapshot} runtime={runtime} />
