@@ -1,0 +1,66 @@
+.search-label {
+  @apply text-xl;
+  @apply font-bold;
+}
+
+.search-input {
+  @apply focus:border-blue-100;
+  @apply flex;
+  @apply h-10;
+  @apply w-full;
+  @apply items-center;
+  @apply rounded-full;
+  @apply border;
+  @apply border-black/20;
+  @apply bg-white;
+  @apply placeholder:text-gray-400;
+  @apply focus:outline-none;
+  @apply px-4;
+}
+
+.search-icon {
+  @apply absolute;
+  @apply inset-y-0;
+  @apply right-3;
+  @apply flex;
+  @apply items-center;
+  @apply focus:outline-none;
+}
+
+.search-options {
+  @apply absolute;
+  @apply z-10;
+  @apply mt-1;
+  @apply max-h-60;
+  @apply w-full;
+  @apply overflow-auto;
+  @apply rounded-md;
+  @apply bg-white;
+  @apply py-1;
+  @apply text-base;
+  @apply shadow-lg;
+  @apply ring-1;
+  @apply ring-black/5;
+  @apply focus:outline-none;
+  @apply sm:text-sm;
+}
+
+.search-option {
+  @apply relative;
+  @apply block;
+  @apply cursor-pointer;
+  @apply select-none;
+  @apply py-2;
+  @apply pl-3;
+  @apply text-gray-900;
+  @apply truncate;
+
+  &[data-headlessui-state~='active'] {
+    @apply bg-blue-100;
+    @apply text-white;
+  }
+
+  &[data-headlessui-state~='selected'] {
+    @apply font-bold;
+  }
+}

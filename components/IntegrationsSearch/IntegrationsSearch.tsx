@@ -43,19 +43,16 @@ export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
       className={className}
       onChange={(item: IIntegration) => router.push(`/integrations/#`)}
     >
-      <Combobox.Label className="label text-xl font-bold" hidden={hideLabel}>
+      <Combobox.Label className="search-label" hidden={hideLabel}>
         {label}
       </Combobox.Label>
-      <div className="relative mt-1.5">
+      <div className="relative mt-2">
         <Combobox.Input
-          className={clsx(
-            'placeholder:text-md focus:border-indigo-500 focus:ring-indigo-500 flex h-10 w-full items-center rounded-full border border-black border-opacity-20 bg-white px-4 pr-10 text-lg shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 sm:text-sm',
-          )}
+          className="search-input"
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
-          displayValue={(item: IIntegration) => item.fields.title ?? 'Untitled'}
           placeholder={placeholder}
         />
-        <Combobox.Button className="absolute inset-y-0 right-3 flex items-center focus:outline-none">
+        <Combobox.Button className="search-icon">
           {isLoading ? (
             <Spinner className="text-gray-400" aria-hidden="true" />
           ) : (
@@ -63,24 +60,11 @@ export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
           )}
         </Combobox.Button>
         {!isLoading && (
-          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Combobox.Options className="search-options">
             {data && data.items.length > 0 ? (
               data.items.map(item => (
-                <Combobox.Option
-                  key={item.sys.id}
-                  value={item}
-                  className={({ active }) =>
-                    clsx(
-                      'relative flex cursor-pointer select-none py-2 pl-3 pr-9',
-                      active ? 'bg-blue-100 text-white' : 'text-gray-900',
-                    )
-                  }
-                >
-                  {({ selected }) => (
-                    <span className={clsx('block truncate', selected && 'font-semibold')}>
-                      {item.fields.title}
-                    </span>
-                  )}
+                <Combobox.Option key={item.sys.id} value={item} className="search-option">
+                  {item.fields.title}
                 </Combobox.Option>
               ))
             ) : (
