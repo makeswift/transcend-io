@@ -29,22 +29,22 @@ export const BlogFeed = forwardRef(function BlogFeed(
   const [total, setTotal] = useState(data?._allPostsMeta.count ?? 0)
 
   useEffect(() => {
-    if (!data) return
-
-    setItems(prev => [...prev.slice(0, skip), ...data.allPosts, ...prev.slice(skip + limit)])
+    setItems(prev => [
+      ...prev.slice(0, skip),
+      ...(data?.allPosts ?? []),
+      ...prev.slice(skip + limit),
+    ])
   }, [data, limit, skip])
 
   useEffect(() => {
-    if (!data) return
-
-    setTotal(data._allPostsMeta.count)
-  }, [data])
+    setTotal(data?._allPostsMeta.count ?? 0)
+  }, [data?._allPostsMeta.count])
 
   return (
     <div className={clsx(className, 'grid gap-12')} ref={ref}>
       <div className="grid grid-cols-12 gap-12">
         {items.map(post => (
-          <Link key={post.id} className="group col-span-6 flex gap-8" href={`/blog/${post.slug}`}>
+          <Link key={post.id} className="group col-span-6 flex gap-8" href={`/blog${post.slug}`}>
             {post.hero.responsiveImage && (
               <Image data={post.hero.responsiveImage} className="shrink-0 object-cover" />
             )}
