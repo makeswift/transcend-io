@@ -31,23 +31,25 @@ export function Accordions({ className, accordions }: Props) {
           <Accordion.Item key={i} value={`${i + 1}`} asChild>
             <li className="group rounded-xl bg-white py-5 shadow-2xl shadow-black/10">
               <Accordion.Header>
-                <Accordion.Trigger className="flex w-full items-center gap-x-4 px-5 md:px-10">
-                  <div className="text-md flex-1 py-5 text-left font-bold leading-normal text-gray-900 md:text-lg">
-                    {accordion.title}
-                  </div>
+                <Accordion.Trigger asChild>
+                  <div className="flex w-full cursor-pointer items-center gap-x-4 px-5 md:px-10">
+                    <div className="text-md flex-1 py-5 text-left font-bold leading-normal text-gray-900 md:text-lg">
+                      {accordion.title}
+                    </div>
 
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    className="h-5 w-5 fill-gray-300"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      x="9"
-                      className="h-5 w-0.5 origin-center transition-transform duration-300 group-data-[state=open]:rotate-90"
-                    />
-                    <rect y="9" className="h-0.5 w-5" />
-                  </svg>
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      className="h-5 w-5 fill-gray-300"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="9"
+                        className="h-5 w-0.5 origin-center transition-transform duration-300 group-data-[state=open]:rotate-90"
+                      />
+                      <rect y="9" className="h-0.5 w-5" />
+                    </svg>
+                  </div>
                 </Accordion.Trigger>
               </Accordion.Header>
 
