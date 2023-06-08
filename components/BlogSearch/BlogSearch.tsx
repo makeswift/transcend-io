@@ -64,8 +64,8 @@ export const BlogSearch = forwardRef(function BlogSearch(
                   value={post}
                   className={({ active }) =>
                     clsx(
-                      'relative flex cursor-default select-none py-2 pl-3 pr-9',
-                      active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                      'relative flex cursor-pointer select-none py-2 pl-3 pr-9',
+                      active ? 'bg-blue-100 text-white' : 'text-gray-900',
                     )
                   }
                 >

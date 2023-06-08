@@ -5,9 +5,9 @@ import { Image } from 'react-datocms'
 import clsx from 'clsx'
 import useSWR from 'swr'
 
-import { BlogFeedDocument, PostModelFilter } from '@/generated/dato'
+import { BlogFeedDocument } from '@/generated/dato'
 import { client } from '@/lib/dato/client'
-import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
+import { getCacheKey } from '@/lib/utils'
 
 import { Button } from '../Button'
 
@@ -15,7 +15,7 @@ type Props = {
   className?: string
 }
 
-export const DEFAULT_PARAMS = { limit: 20, skip: 0 }
+export const DEFAULT_PARAMS = { limit: 8, skip: 0 }
 
 export const BlogFeed = forwardRef(function BlogFeed(
   { className }: Props,
@@ -37,14 +37,20 @@ export const BlogFeed = forwardRef(function BlogFeed(
   }, [data, limit, skip])
 
   useEffect(() => {
-    setTotal(data?._allPostsMeta.count ?? 0)
-  }, [data?._allPostsMeta.count])
+    if (!data) return
+
+    setTotal(data._allPostsMeta.count)
+  }, [data])
 
   return (
     <div className={clsx(className, 'grid gap-12')} ref={ref}>
       <div className="grid grid-cols-12 gap-12">
         {items.map(post => (
-          <Link key={post.id} className="group col-span-6 flex gap-8" href={`/blog${post.slug}`}>
+          <Link
+            key={post.id}
+            className="group col-span-12 flex gap-8 md:col-span-6"
+            href={`/blog${post.slug}`}
+          >
             {post.hero.responsiveImage && (
               <Image data={post.hero.responsiveImage} className="shrink-0 object-cover" />
             )}
@@ -69,7 +75,7 @@ export const BlogFeed = forwardRef(function BlogFeed(
         ))}
       </div>
       {items.length < total && (
-        <div className="flex justify-center">
+        <div className="flex justify-start">
           <Button
             variant="outlined"
             onClick={() => {
