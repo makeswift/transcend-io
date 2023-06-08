@@ -1,3 +1,4 @@
+export * from './Accordions'
 export * from './Button'
 export * from './Carousel'
 export * from './IntegrationsFeed'

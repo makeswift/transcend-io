@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useMemo, useState } from 'react'
+import { Ref, forwardRef, useMemo, useState } from 'react'
 
 import { Combobox } from '@headlessui/react'
 import clsx from 'clsx'
@@ -17,7 +17,10 @@ type Props = {
   placeholder?: string
 }
 
-export function BlogSearch({ className, label = 'Search', placeholder = 'Search' }: Props) {
+export const BlogSearch = forwardRef(function BlogSearch(
+  { className, label = 'Search', placeholder = 'Search' }: Props,
+  ref: Ref<HTMLDivElement>,
+) {
   const router = useRouter()
   const [filter, setFilter] = useState<PostModelFilter | undefined>()
   const { data, isLoading } = useSWR(filter && getCacheKey('blog/search', { filter }), () =>
@@ -34,6 +37,7 @@ export function BlogSearch({ className, label = 'Search', placeholder = 'Search'
 
   return (
     <Combobox
+      ref={ref}
       as="div"
       className={className}
       onChange={(item: PostRecord) => router.push(`/blog/${item.slug}`)}
@@ -80,4 +84,4 @@ export function BlogSearch({ className, label = 'Search', placeholder = 'Search'
       </div>
     </Combobox>
   )
-}
+})

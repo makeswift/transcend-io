@@ -3,12 +3,13 @@ import { GetStaticPropsContext } from 'next/types'
 import { Page as MakeswiftPage, PageProps as MakeswiftPageProps } from '@makeswift/runtime/next'
 import { SWRConfig } from 'swr'
 
+import { DEFAULT_PARAMS } from '@/components/BlogFeed'
 import { BlogCategoriesDocument, BlogFeedDocument } from '@/generated/dato'
 import { client } from '@/lib/dato/client'
 import { client as MakeswiftClient } from '@/lib/makeswift/client'
 import '@/lib/makeswift/components'
 import { runtime } from '@/lib/makeswift/runtime'
-import { DEFAULT_FEED_PARAMS, getCacheKey } from '@/lib/utils'
+import { getCacheKey } from '@/lib/utils'
 
 export async function getStaticProps({
   previewData,
@@ -24,9 +25,9 @@ export async function getStaticProps({
     props: {
       snapshot,
       fallback: {
-        [getCacheKey('blog/feed', DEFAULT_FEED_PARAMS)]: await client.request(
+        [getCacheKey('blog/feed', DEFAULT_PARAMS)]: await client.request(
           BlogFeedDocument,
-          DEFAULT_FEED_PARAMS,
+          DEFAULT_PARAMS,
         ),
         [getCacheKey('blog/categories')]: await client.request(BlogCategoriesDocument),
       },

@@ -1472,6 +1472,8 @@ export type FeaturesGridRecord_SeoMetaTagsArgs = {
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
   author?: Maybe<Scalars['String']['output']>;
@@ -1548,6 +1550,8 @@ export type FileFieldUrlArgs = {
 
 export type FileFieldInterface = {
   _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
   author?: Maybe<Scalars['String']['output']>;
