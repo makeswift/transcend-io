@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ReactNode, Ref, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ReactNode, Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
@@ -21,7 +21,7 @@ const BUTTON_VARIANT_STYLES: { [key: string]: string } = {
   'outlined-white': 'bg-transparent border-white text-white hover:bg-white hover:text-blue-100',
 }
 
-type ButtonProps = {
+type BaseButtonProps = {
   children?: ReactNode
   size?: 'medium' | 'large'
   variant?: 'filled' | 'outlined'
@@ -29,6 +29,8 @@ type ButtonProps = {
   showIcon?: boolean
   className?: string
 }
+
+type Props = BaseButtonProps & Omit<ComponentPropsWithoutRef<'button'>, keyof BaseButtonProps>
 
 export const Button = forwardRef(function Button(
   {
@@ -38,13 +40,15 @@ export const Button = forwardRef(function Button(
     variant = 'filled',
     color = 'blue',
     showIcon = false,
-  }: ButtonProps,
+    ...rest
+  }: Props,
   ref: Ref<HTMLButtonElement>,
 ) {
   const buttonConfig = `${variant}-${color}`
 
   return (
     <button
+      {...rest}
       ref={ref}
       className={clsx(
         className,
@@ -59,12 +63,12 @@ export const Button = forwardRef(function Button(
   )
 })
 
-type LinkButtonProps = {
+type BaseLinkButtonProps = {
   link?: { href: string; target?: '_self' | '_blank' }
-} & ButtonProps
+} & Props
 
 export const LinkButton = forwardRef(function LinkButton(
-  { link, className, ...rest }: LinkButtonProps,
+  { link, className, ...rest }: BaseLinkButtonProps,
   ref: Ref<HTMLAnchorElement>,
 ) {
   return (
