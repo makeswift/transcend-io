@@ -1,32 +1,24 @@
-import { Ref, forwardRef, useEffect, useState } from 'react'
+import React, { Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
-import highlight from 'highlight.js/lib/core'
-import typescript from 'highlight.js/lib/languages/typescript'
+import { highlight, languages } from 'prismjs'
+import 'prismjs/components/prism-javascript'
 
 type Props = {
   className?: string
   code?: string
-  language?: 'typescript'
+  language?: 'js'
 }
 
-highlight.registerLanguage('typescript', typescript)
-
 export const CodeBlock = forwardRef(function CodeBlock(
-  { className, code = '', language = 'typescript' }: Props,
-  ref: Ref<HTMLElement>,
+  { className, code = '', language = 'js' }: Props,
+  ref: Ref<HTMLPreElement>,
 ) {
-  const [highlighted, setHighlighted] = useState<string>('')
-
-  useEffect(() => {
-    setHighlighted(highlight.highlight(code, { language }).value)
-  }, [code, language])
-
   return (
-    <code
+    <pre
       ref={ref}
-      className={clsx('hljs language-tsx !p-6 font-code text-sm', className)}
-      dangerouslySetInnerHTML={{ __html: highlighted }}
+      className={clsx('language-js', className)}
+      dangerouslySetInnerHTML={{ __html: highlight(code, languages[language], language) }}
     />
   )
 })

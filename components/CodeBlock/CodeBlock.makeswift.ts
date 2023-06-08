@@ -15,13 +15,13 @@ runtime.registerComponent(
     icon: 'code',
     props: {
       className: Style({
-        properties: [Style.Width, Style.Margin, Style.BorderRadius],
+        properties: [Style.Width, Style.Margin, Style.Padding, Style.BorderRadius],
       }),
       code: TextArea({ label: 'Code', rows: 20 }),
       language: Select({
         label: 'Language',
-        options: [{ label: 'Typescript', value: 'typescript' }],
-        defaultValue: 'typescript',
+        options: [{ label: 'Javascript', value: 'js' }],
+        defaultValue: 'js',
       }),
     },
   },
