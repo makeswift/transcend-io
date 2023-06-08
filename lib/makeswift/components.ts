@@ -1,5 +1,6 @@
 import '@/components/Accordions/Accordions.makeswift'
 import '@/components/BlogCategories/BlogCategories.makeswift'
+import '@/components/BlogFeaturedPost/BlogFeaturedPost.makeswift'
 import '@/components/BlogFeed/BlogFeed.makeswift'
 import '@/components/BlogSearch/BlogSearch.makeswift'
 import '@/components/Button/Button.makeswift'
