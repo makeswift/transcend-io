@@ -1,4 +1,4 @@
-import React, { Ref, forwardRef } from 'react'
+import React, { Ref, forwardRef, useEffect, useState } from 'react'
 
 import clsx from 'clsx'
 import { highlight, languages } from 'prismjs'
@@ -14,11 +14,17 @@ export const CodeBlock = forwardRef(function CodeBlock(
   { className, code = '', language = 'js' }: Props,
   ref: Ref<HTMLPreElement>,
 ) {
+  const [html, setHtml] = useState(highlight(code, languages[language], language))
+
+  useEffect(() => {
+    setHtml(highlight(code, languages[language], language))
+  }, [language, code])
+
   return (
     <pre
       ref={ref}
       className={clsx('language-js', className)}
-      dangerouslySetInnerHTML={{ __html: highlight(code, languages[language], language) }}
+      dangerouslySetInnerHTML={{ __html: html }}
     />
   )
 })
