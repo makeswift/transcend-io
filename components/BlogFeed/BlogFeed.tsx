@@ -43,23 +43,25 @@ export const BlogFeed = forwardRef(function BlogFeed(
   }, [data])
 
   return (
-    <div className={clsx(className, 'grid gap-12')} ref={ref}>
-      <div className="grid grid-cols-12 gap-12">
+    <div className={clsx(className, 'space-y-12')} ref={ref}>
+      <div className="grid grid-cols-12 gap-y-12 md:gap-x-12">
         {items.map(post => (
           <Link
             key={post.id}
-            className="group col-span-12 flex gap-8 md:col-span-6"
+            className="group col-span-12 grid gap-8 sm:flex md:col-span-6"
             href={`/blog${post.slug}`}
           >
-            {post.hero.responsiveImage && (
-              <Image data={post.hero.responsiveImage} className="shrink-0 object-cover" />
-            )}
-            <div className="flex flex-col justify-between">
+            <div className="relative h-[200px] w-full shrink-0 sm:h-[150px] sm:w-[200px] lg:h-[150px] lg:w-[250px] xl:h-[200px] xl:w-[300px]">
+              {post.hero.responsiveImage && (
+                <Image data={post.hero.responsiveImage} layout="fill" objectFit="cover" />
+              )}
+            </div>
+            <div className="flex flex-col justify-between gap-4">
               <div className="space-y-3">
-                <h3 className="line-clamp-2 text-xl font-bold group-hover:text-blue-100">
+                <h3 className="line-clamp-3 text-xl font-bold group-hover:text-blue-100 md:line-clamp-3 lg:line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="line-clamp-3 text-lg font-light">{post.excerpt}</p>
+                <p className="line-clamp-3 text-lg font-light md:hidden lg:block">{post.excerpt}</p>
               </div>
               <div className="flex text-gray-400">
                 {post._publishedAt &&
