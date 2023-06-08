@@ -19,17 +19,17 @@ type Props = {
   hideLabel?: boolean
 }
 
-export const DEFAULT_PARAMS = { limit: 10, filter: '', order: 'fields.title' }
+export const DEFAULT_PARAMS = { limit: 10, filter: '' }
 
 export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
   { className, label = 'Search', placeholder = 'Search', hideLabel }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
   const router = useRouter()
-  const [{ filter, limit, order }, setFilter] = useState(DEFAULT_PARAMS)
+  const [{ filter, limit }, setFilter] = useState(DEFAULT_PARAMS)
   const { data, isLoading } = useSWR(
-    filter && getCacheKey('integrations/search', { filter, limit, order }),
-    () => fetchIntegrationsSearch({ filter, limit, order }),
+    filter && getCacheKey('integrations/search', { filter, limit }),
+    () => fetchIntegrationsSearch({ filter, limit }),
   )
   const debouncedSetFilter = useMemo(
     () => debounce((pattern: string) => setFilter(prev => ({ ...prev, filter: pattern })), 200),
@@ -77,7 +77,7 @@ export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
   )
 })
 
-export async function fetchIntegrationsSearch({ limit, filter, order } = DEFAULT_PARAMS): Promise<
+export async function fetchIntegrationsSearch({ limit, filter } = DEFAULT_PARAMS): Promise<
   ContentfulCollection<IIntegration>
 > {
   try {
@@ -86,7 +86,6 @@ export async function fetchIntegrationsSearch({ limit, filter, order } = DEFAULT
         new URLSearchParams({
           limit: limit.toString(),
           filter,
-          order,
         }),
     ).then(r => r.json())
 

@@ -17,13 +17,11 @@ export const contentfulClient = createClient({
 
 export function getIntegrations({
   skip,
-  order,
   limit,
   filter,
 }: {
   skip: string | number
   limit: string | number
-  order?: string
   filter?: string
 } = DEFAULT_FEED_PARAMS): Promise<EntryCollection<IIntegration>> {
   return contentfulClient.getEntries<IIntegration>({
@@ -31,8 +29,9 @@ export function getIntegrations({
     limit,
     skip,
     include: 10,
-    order,
+    order: '-fields.isFeatured,fields.title',
     'fields.logoSquare': { exists: true },
+    'fields.integrationStatus': 'ONLINE',
     ...(filter ? { 'fields.title[match]': filter } : {}),
   })
 }

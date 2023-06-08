@@ -18,16 +18,15 @@ type Props = {
 export const DEFAULT_PARAMS = {
   limit: 30,
   skip: 0,
-  order: '-fields.isFeatured,fields.title',
 }
 
 export const IntegrationsFeed = forwardRef(function IntegrationsFeed(
   { className }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
-  const [{ limit, skip, order }, setParams] = useState(DEFAULT_PARAMS)
-  const { data, isLoading } = useSWR(getCacheKey('integrations/feed', { skip, limit, order }), () =>
-    fetchIntegrationsFeed({ skip, limit, order }),
+  const [{ limit, skip }, setParams] = useState(DEFAULT_PARAMS)
+  const { data, isLoading } = useSWR(getCacheKey('integrations/feed', { skip, limit }), () =>
+    fetchIntegrationsFeed({ skip, limit }),
   )
   const [items, setItems] = useState(data?.items ?? [])
   const [total, setTotal] = useState(data?.total ?? 0)
@@ -90,7 +89,7 @@ export const IntegrationsFeed = forwardRef(function IntegrationsFeed(
   )
 })
 
-export async function fetchIntegrationsFeed({ limit, skip, order } = DEFAULT_PARAMS): Promise<
+export async function fetchIntegrationsFeed({ limit, skip } = DEFAULT_PARAMS): Promise<
   ContentfulCollection<IIntegration>
 > {
   try {
@@ -99,7 +98,6 @@ export async function fetchIntegrationsFeed({ limit, skip, order } = DEFAULT_PAR
         new URLSearchParams({
           limit: limit.toString(),
           skip: skip.toString(),
-          order,
         }),
     ).then(r => r.json())
 
