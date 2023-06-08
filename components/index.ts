@@ -1,5 +1,6 @@
 export * from './Accordions'
 export * from './Button'
+export * from './ButtonGroup'
 export * from './Carousel'
 export * from './IntegrationsFeed'
 export * from './Marquee'
