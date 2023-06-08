@@ -65,12 +65,12 @@ export const BlogFeed = forwardRef(function BlogFeed(
               </div>
               <div className="flex text-gray-400">
                 {post._publishedAt &&
-                  new Date(post._publishedAt).toLocaleDateString('en-US', {
+                  `${new Date(post._publishedAt).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',
-                  })}{' '}
-                • {post.readTime} min read
+                  })} • `}
+                {post.readTime} min read
               </div>
             </div>
           </Link>
