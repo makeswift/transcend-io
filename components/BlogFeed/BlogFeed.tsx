@@ -48,7 +48,7 @@ export const BlogFeed = forwardRef(function BlogFeed(
         {items.map(post => (
           <Link
             key={post.id}
-            className="group col-span-12 grid gap-8 sm:flex md:col-span-6"
+            className="group col-span-12 grid gap-5 sm:flex sm:gap-8 md:col-span-6"
             href={`/blog${post.slug}`}
           >
             <div className="relative h-[200px] w-full shrink-0 sm:h-[150px] sm:w-[200px] lg:h-[150px] lg:w-[250px] xl:h-[200px] xl:w-[300px]">
@@ -61,7 +61,9 @@ export const BlogFeed = forwardRef(function BlogFeed(
                 <h3 className="line-clamp-3 text-xl font-bold group-hover:text-blue-100 md:line-clamp-3 lg:line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="line-clamp-3 text-lg font-light md:hidden lg:block">{post.excerpt}</p>
+                <p className="line-clamp-2 text-lg font-light md:hidden lg:[display:-webkit-box]">
+                  {post.excerpt}
+                </p>
               </div>
               <div className="flex text-gray-400">
                 {post._publishedAt &&
