@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Ref, forwardRef, useMemo, useState } from 'react'
 
@@ -42,10 +43,10 @@ export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
       className={className}
       onChange={(item: IIntegration) => router.push(`/integrations/#`)}
     >
-      <Combobox.Label className="search-label" hidden={hideLabel}>
+      <Combobox.Label className="search-label" hidden={hideLabel} aria-hidden={hideLabel}>
         {label}
       </Combobox.Label>
-      <div className="relative mt-2">
+      <div className="relative">
         <Combobox.Input
           className="search-input"
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
@@ -63,6 +64,14 @@ export const IntegrationsSearch = forwardRef(function IntegrationsSearch(
             {data && data.items.length > 0 ? (
               data.items.map(item => (
                 <Combobox.Option key={item.sys.id} value={item} className="search-option">
+                  {item.fields.logoSquare && (
+                    <Image
+                      src={`https:${item.fields.logoSquare.fields.file.url}`}
+                      width={24}
+                      height={24}
+                      alt={`${item.fields.title} logo`}
+                    />
+                  )}
                   {item.fields.title}
                 </Combobox.Option>
               ))
