@@ -177,7 +177,7 @@ export function Navigation({
 
                   <NavigationMenu.Content className="absolute -left-16 top-full flex w-full origin-top animate-fadeIn overflow-hidden rounded-xl bg-white shadow-md sm:w-auto">
                     {mainLink.subnavGroups?.map((subnavGroup, i) => (
-                      <ul key={i} className="w-72 border-r border-gray-100">
+                      <ul key={i} className="w-60 border-r border-gray-100">
                         <li className="px-6 pb-2 pt-6 text-xxs font-bold uppercase tracking-widest text-gray-700">
                           {subnavGroup.heading}
                         </li>
@@ -204,7 +204,7 @@ export function Navigation({
                                   </p>
 
                                   {subnavLink.subtext && (
-                                    <p className="leading-normal text-gray-400 group-hover:text-blue-100">
+                                    <p className="text-sm leading-normal text-gray-400 group-hover:text-blue-100">
                                       {subnavLink.subtext}
                                     </p>
                                   )}
