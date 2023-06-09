@@ -3,8 +3,6 @@ import { EntryCollection, createClient } from 'contentful'
 
 import { IIntegration } from '@/generated/contentful'
 
-import { DEFAULT_FEED_PARAMS } from '../utils'
-
 strict(process.env.CONTENTFUL_SPACE_ID)
 strict(process.env.CONTENTFUL_ACCESS_TOKEN)
 strict(process.env.CONTENTFUL_ENVIRONMENT)
@@ -23,7 +21,7 @@ export function getIntegrations({
   skip: string | number
   limit: string | number
   filter?: string
-} = DEFAULT_FEED_PARAMS): Promise<EntryCollection<IIntegration>> {
+}): Promise<EntryCollection<IIntegration>> {
   return contentfulClient.getEntries<IIntegration>({
     content_type: 'integration',
     limit,
