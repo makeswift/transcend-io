@@ -1,63 +1,24 @@
 .search-label {
-  @apply text-xl;
-  @apply font-bold;
+  @apply text-xl font-bold;
 }
 
 .search-input {
-  @apply focus:border-blue-100;
-  @apply flex;
-  @apply h-10;
-  @apply w-full;
-  @apply items-center;
-  @apply rounded-full;
-  @apply border;
-  @apply border-black/20;
-  @apply bg-white;
-  @apply placeholder:text-gray-400;
-  @apply focus:outline-none;
-  @apply px-4;
+  @apply focus:border-blue-100 flex h-10 w-full rounded-full items-center border border-black/20 bg-white placeholder:text-gray-400 focus:outline-none px-4;
 }
 
 .search-icon {
-  @apply absolute;
-  @apply inset-y-0;
-  @apply right-3;
-  @apply flex;
-  @apply items-center;
-  @apply focus:outline-none;
+  @apply absolute inset-y-0 right-3 flex items-center focus:outline-none;
 }
 
 .search-options {
-  @apply absolute;
-  @apply z-10;
-  @apply mt-1;
-  @apply max-h-60;
-  @apply w-full;
-  @apply overflow-auto;
-  @apply rounded-md;
-  @apply bg-white;
-  @apply py-1;
-  @apply text-base;
-  @apply shadow-lg;
-  @apply ring-1;
-  @apply ring-black/5;
-  @apply focus:outline-none;
-  @apply sm:text-sm;
+  @apply absolute z-10 mt-1 max-h-80 w-full overflow-auto rounded-lg bg-white py-3 text-sm shadow-lg shadow-black/5 ring-1 ring-black/10 focus:outline-none sm:text-base;
 }
 
 .search-option {
-  @apply relative;
-  @apply block;
-  @apply cursor-pointer;
-  @apply select-none;
-  @apply py-2;
-  @apply pl-3;
-  @apply text-gray-700;
-  @apply truncate;
+  @apply relative block cursor-pointer select-none py-2 px-5 text-gray-700 truncate;
 
   &[data-headlessui-state~='active'] {
-    @apply bg-blue-100;
-    @apply text-white;
+    @apply bg-gray-100 text-blue-100;
   }
 
   &[data-headlessui-state~='selected'] {
