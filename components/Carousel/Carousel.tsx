@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Children, useEffect } from 'react'
+import { Ref, forwardRef, useEffect } from 'react'
 import React from 'react'
 
 import clsx from 'clsx'
@@ -17,13 +17,15 @@ type Slide = {
 
 type Props = {
   className?: string
-  children?: React.ReactNode[]
   loop?: boolean
   autoplay?: number
   slides: Slide[]
 }
 
-export function Carousel({ className, slides, loop = true, autoplay = 0 }: Props) {
+export const Carousel = forwardRef(function Carousel(
+  { className, slides, loop = true, autoplay = 0 }: Props,
+  ref: Ref<HTMLDivElement>,
+) {
   const [opacities, setOpacities] = React.useState<number[]>([])
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     {
@@ -68,7 +70,7 @@ export function Carousel({ className, slides, loop = true, autoplay = 0 }: Props
   }
 
   return (
-    <div className={clsx(className)}>
+    <div className={clsx(className)} ref={ref}>
       {slides.length > 0 ? (
         <div
           tabIndex={-1}
@@ -149,4 +151,4 @@ export function Carousel({ className, slides, loop = true, autoplay = 0 }: Props
       )}
     </div>
   )
-}
+})

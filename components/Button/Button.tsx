@@ -8,18 +8,20 @@ import { ChevronRight } from '@/generated/icons'
 const SIZE_STYLES = {
   medium: 'px-5 py-2.5',
   large: 'px-7 py-4',
-}
+} as const
 
-const BUTTON_VARIANT_STYLES: { [key: string]: string } = {
-  'filled-blue': 'bg-blue-100 border-blue-100 text-white hover:bg-transparent hover:text-blue-100',
-  'filled-gray': 'bg-gray-900 border-gray-900 text-white hover:bg-transparent hover:text-gray-900',
-  'filled-white': 'bg-white border-white text-blue-100 hover:bg-transparent hover:text-white',
-  'outlined-blue':
-    'bg-transparent border-blue-100 text-blue-100 hover:bg-blue-100 hover:text-white',
-  'outlined-gray':
-    'bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white',
-  'outlined-white': 'bg-transparent border-white text-white hover:bg-white hover:text-blue-100',
-}
+const BUTTON_STYLES = {
+  filled: {
+    blue: 'bg-blue-100 border-blue-100 text-white hover:bg-transparent hover:text-blue-100',
+    gray: 'bg-gray-900 border-gray-900 text-white hover:bg-transparent hover:text-gray-900',
+    white: 'bg-white border-white text-blue-100 hover:bg-transparent hover:text-white',
+  },
+  outlined: {
+    blue: 'bg-transparent border-blue-100 text-blue-100 hover:bg-blue-100 hover:text-white',
+    gray: 'bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white',
+    white: 'bg-transparent border-white text-white hover:bg-white hover:text-blue-100',
+  },
+} as const
 
 type BaseButtonProps = {
   children?: ReactNode
@@ -44,15 +46,13 @@ export const Button = forwardRef(function Button(
   }: Props,
   ref: Ref<HTMLButtonElement>,
 ) {
-  const buttonConfig = `${variant}-${color}`
-
   return (
     <button
       {...rest}
       ref={ref}
       className={clsx(
         className,
-        BUTTON_VARIANT_STYLES[buttonConfig],
+        BUTTON_STYLES[variant][color],
         SIZE_STYLES[size],
         'group inline-flex items-center gap-3 rounded-lg border text-sm font-bold leading-none transition duration-150',
       )}
