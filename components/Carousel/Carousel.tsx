@@ -95,11 +95,11 @@ export const Carousel = forwardRef(function Carousel(
             ref={sliderRef}
           >
             {slides.map((slide, index) => (
-              <div key={index} className="" style={{ opacity: opacities[index] }}>
-                <div className="flex">
-                  <div className="w-[300px] py-5">
+              <div key={index} className="min-w-full" style={{ opacity: opacities[index] }}>
+                <div className="flex flex-col md:flex-row">
+                  <div className="mx-auto w-full px-5 md:w-[300px] md:px-0 md:py-5">
                     <div
-                      className="flex h-full items-center justify-center rounded-l-xl"
+                      className="flex h-64 items-center justify-center rounded-t-xl md:h-full md:rounded-l-xl"
                       style={{ backgroundColor: slide.slideColor }}
                     >
                       {slide.logo && (
@@ -107,11 +107,11 @@ export const Carousel = forwardRef(function Carousel(
                       )}
                     </div>
                   </div>
-                  <div className="flex-1 rounded-xl bg-white p-20">
-                    <p className="text-[28px] font-light leading-snug tracking-wide text-[#2B292D]">
+                  <div className="flex-1 rounded-xl bg-white p-10 md:p-20">
+                    <p className="text-xl font-light leading-snug tracking-wide text-gray-700 md:text-2xl">
                       {slide.quote}
                     </p>
-                    <p className="mt-12 text-base text-[#2B292D]">
+                    <p className="mt-12 text-base text-gray-700">
                       <span className="font-bold">{slide.author}</span>
                       {' | '}
                       <span>{slide.authorTitle}</span>
@@ -122,28 +122,30 @@ export const Carousel = forwardRef(function Carousel(
             ))}
           </div>
 
-          <div
-            className="absolute -left-7 top-1/2 h-14 w-14 -translate-y-1/2 cursor-pointer rounded-md bg-white p-4 shadow-[10px_15px_21px_11px_rgba(0,0,0,0.05)]"
-            onClick={prevSlide}
-          >
-            <svg viewBox="0 0 31.494 31.494" className="h-[26px] w-[26px]">
-              <path
-                d="M10.273 5.009a1.112 1.112 0 011.587 0 1.12 1.12 0 010 1.571l-8.047 8.047h26.554c.619 0 1.127.492 1.127 1.111s-.508 1.127-1.127 1.127H3.813l8.047 8.032c.429.444.429 1.159 0 1.587a1.112 1.112 0 01-1.587 0L.321 16.532a1.12 1.12 0 010-1.571l9.952-9.952z"
-                fill="#1e201d"
-              ></path>
-            </svg>
-          </div>
+          <div className="mt-6 flex justify-between md:mt-0">
+            <div
+              className="-left-7 top-1/2 h-14 w-14 cursor-pointer rounded-md bg-white p-4 shadow-[10px_15px_21px_11px_rgba(0,0,0,0.05)] md:absolute md:-translate-y-1/2"
+              onClick={prevSlide}
+            >
+              <svg viewBox="0 0 31.494 31.494" className="h-[26px] w-[26px]">
+                <path
+                  d="M10.273 5.009a1.112 1.112 0 011.587 0 1.12 1.12 0 010 1.571l-8.047 8.047h26.554c.619 0 1.127.492 1.127 1.111s-.508 1.127-1.127 1.127H3.813l8.047 8.032c.429.444.429 1.159 0 1.587a1.112 1.112 0 01-1.587 0L.321 16.532a1.12 1.12 0 010-1.571l9.952-9.952z"
+                  fill="#1e201d"
+                ></path>
+              </svg>
+            </div>
 
-          <div
-            className="absolute -right-7 top-1/2 h-14 w-14 -translate-y-1/2 cursor-pointer rounded-md bg-white p-4 shadow-[10px_15px_21px_11px_rgba(0,0,0,0.05)]"
-            onClick={nextSlide}
-          >
-            <svg viewBox="0 0 31.494 31.494" className="h-[26px] w-[26px] rotate-180">
-              <path
-                d="M10.273 5.009a1.112 1.112 0 011.587 0 1.12 1.12 0 010 1.571l-8.047 8.047h26.554c.619 0 1.127.492 1.127 1.111s-.508 1.127-1.127 1.127H3.813l8.047 8.032c.429.444.429 1.159 0 1.587a1.112 1.112 0 01-1.587 0L.321 16.532a1.12 1.12 0 010-1.571l9.952-9.952z"
-                fill="#1e201d"
-              ></path>
-            </svg>
+            <div
+              className="-right-7 top-1/2 h-14 w-14 cursor-pointer rounded-md bg-white p-4 shadow-[10px_15px_21px_11px_rgba(0,0,0,0.05)] md:absolute md:-translate-y-1/2"
+              onClick={nextSlide}
+            >
+              <svg viewBox="0 0 31.494 31.494" className="h-[26px] w-[26px] rotate-180">
+                <path
+                  d="M10.273 5.009a1.112 1.112 0 011.587 0 1.12 1.12 0 010 1.571l-8.047 8.047h26.554c.619 0 1.127.492 1.127 1.111s-.508 1.127-1.127 1.127H3.813l8.047 8.032c.429.444.429 1.159 0 1.587a1.112 1.112 0 01-1.587 0L.321 16.532a1.12 1.12 0 010-1.571l9.952-9.952z"
+                  fill="#1e201d"
+                ></path>
+              </svg>
+            </div>
           </div>
         </div>
       ) : (
