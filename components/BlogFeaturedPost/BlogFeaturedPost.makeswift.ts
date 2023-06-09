@@ -13,7 +13,7 @@ runtime.registerComponent(
   ),
   {
     type: 'BlogFeaturedPost',
-    label: 'Blog/FeaturedPost',
+    label: 'Blog/Featured Post',
     props: {
       className: Style(),
     },
