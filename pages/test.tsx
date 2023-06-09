@@ -1,4 +1,5 @@
 import { BlogFeaturedPost } from '@/components/BlogFeaturedPost'
+import { BlogSearch } from '@/components/BlogSearch'
 import { BlogTopPosts } from '@/components/BlogTopPosts'
 import { Form } from '@/components/Form'
 import { InlineForm } from '@/components/InlineForm'
@@ -11,7 +12,8 @@ import { Spinner } from '@/components/Spinner'
 export default function Test() {
   return (
     <div className="m-auto max-w-[1200px] space-y-10 p-5">
-      <InlineForm />
+      <IntegrationsSearch />
+      <BlogSearch />
       <BlogTopPosts />
       <IntegrationsFeed />
       <Input placeholder="Email" />

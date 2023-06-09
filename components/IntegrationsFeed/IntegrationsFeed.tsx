@@ -16,7 +16,7 @@ type Props = {
 }
 
 export const DEFAULT_PARAMS = {
-  limit: 30,
+  limit: 24,
   skip: 0,
 }
 

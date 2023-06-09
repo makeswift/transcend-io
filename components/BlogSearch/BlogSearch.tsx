@@ -43,10 +43,10 @@ export const BlogSearch = forwardRef(function BlogSearch(
       className={className}
       onChange={(item: PostRecord) => router.push(`/blog/${item.slug}`)}
     >
-      <Combobox.Label className="search-label" hidden={hideLabel}>
+      <Combobox.Label className="search-label" hidden={hideLabel} aria-hidden={hideLabel}>
         {label}
       </Combobox.Label>
-      <div className="relative mt-2">
+      <div className="relative">
         <Combobox.Input
           className="search-input"
           onChange={e => debouncedSetFilter(e.currentTarget.value)}
