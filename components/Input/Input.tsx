@@ -19,7 +19,7 @@ export const Input = forwardRef(function Input(
       ref={ref}
       className={clsx(
         className,
-        'flex h-12 items-center rounded border border-gray-200 px-5 text-base leading-none placeholder:text-base placeholder:text-gray-500 focus:border-blue-100 focus:outline-none',
+        'flex h-12 items-center rounded-lg border border-gray-200 px-5 text-base leading-none placeholder:text-base placeholder:text-gray-500 focus:border-blue-100 focus:outline-none',
       )}
     />
   )
