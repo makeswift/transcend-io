@@ -65,7 +65,7 @@ export const BlogFeed = forwardRef(function BlogFeed(
                   {post.excerpt}
                 </p>
               </div>
-              <div className="flex text-gray-400">
+              <div className="text-gray-500">
                 {post._publishedAt &&
                   `${new Date(post._publishedAt).toLocaleDateString('en-US', {
                     month: 'long',

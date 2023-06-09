@@ -27,7 +27,7 @@ export const Card = forwardRef(function Card(
       target={link?.target}
       className={clsx(
         className,
-        'flex w-full flex-col self-stretch overflow-hidden rounded-xl border border-gray-200 bg-white text-gray-900 transition-shadow hover:shadow-xl hover:shadow-black/5',
+        'flex w-full flex-col self-stretch overflow-hidden rounded-xl border border-gray-200 bg-white text-gray-700 transition-shadow hover:shadow-xl hover:shadow-black/5',
       )}
     >
       {imageSrc && (

@@ -13,12 +13,12 @@ const SIZE_STYLES = {
 const BUTTON_STYLES = {
   filled: {
     blue: 'bg-blue-100 border-blue-100 text-white hover:bg-transparent hover:text-blue-100',
-    gray: 'bg-gray-900 border-gray-900 text-white hover:bg-transparent hover:text-gray-900',
+    gray: 'bg-gray-700 border-gray-700 text-white hover:bg-transparent hover:text-gray-700',
     white: 'bg-white border-white text-blue-100 hover:bg-transparent hover:text-white',
   },
   outlined: {
     blue: 'bg-transparent border-blue-100 text-blue-100 hover:bg-blue-100 hover:text-white',
-    gray: 'bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white',
+    gray: 'bg-transparent border-gray-700 text-gray-700 hover:bg-gray-700 hover:text-white',
     white: 'bg-transparent border-white text-white hover:bg-white hover:text-blue-100',
   },
 } as const

@@ -110,8 +110,8 @@ export function Navigation({
         <nav
           className={clsx(
             'mx-auto flex h-[70px] w-full max-w-[1296px] items-center justify-between px-5 md:px-8 lg:justify-start lg:px-12',
-            darkMode ? 'text-white' : 'text-gray-900',
-            sticky && '!text-gray-900',
+            darkMode ? 'text-white' : 'text-gray-700',
+            sticky && '!text-gray-700',
           )}
         >
           <Link href={logoLink?.href ?? '#'} target={logoLink?.target}>
@@ -251,7 +251,7 @@ export function Navigation({
 
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className={clsx('block w-7 lg:hidden', sticky ? 'text-gray-900' : 'text-white')}
+            className={clsx('block w-7 lg:hidden', sticky ? 'text-gray-700' : 'text-white')}
           >
             <svg
               viewBox="0 0 26 24"

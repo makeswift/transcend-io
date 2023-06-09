@@ -30,7 +30,7 @@ export const Accordions = forwardRef(function Accordions(
                 <Accordion.Header>
                   <Accordion.Trigger asChild>
                     <div className="flex w-full cursor-pointer items-center gap-x-4 px-5 md:px-10">
-                      <div className="text-md flex-1 py-5 text-left font-bold leading-normal text-gray-900 md:text-lg">
+                      <div className="text-md text-gray-900 flex-1 py-5 text-left font-bold leading-normal md:text-lg">
                         {accordion.title}
                       </div>
 
@@ -51,7 +51,7 @@ export const Accordions = forwardRef(function Accordions(
                 </Accordion.Header>
 
                 <Accordion.Content className="w-full overflow-hidden data-[state=closed]:animate-accordionSlideUp data-[state=open]:animate-accordionSlideDown">
-                  <div className="text-md px-5 pb-1 leading-relaxed text-gray-900 md:px-10 md:pb-3">
+                  <div className="text-md text-gray-900 px-5 pb-1 leading-relaxed md:px-10 md:pb-3">
                     {accordion.children}
                   </div>
                 </Accordion.Content>
