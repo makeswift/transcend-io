@@ -99,7 +99,7 @@ export const Carousel = forwardRef(function Carousel(
                 <div className="flex flex-col md:flex-row">
                   <div className="mx-auto w-full px-5 md:w-[300px] md:px-0 md:py-5">
                     <div
-                      className="flex h-64 items-center justify-center rounded-t-xl md:h-full md:rounded-l-xl"
+                      className="flex h-64 items-center justify-center rounded-t-xl md:h-full md:rounded-l-xl md:rounded-tr-none"
                       style={{ backgroundColor: slide.slideColor }}
                     >
                       {slide.logo && (
