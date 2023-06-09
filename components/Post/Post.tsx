@@ -66,8 +66,8 @@ export const Post = forwardRef(function Post(
       >
         <div className="text-xs font-bold uppercase text-blue-100">{preHeading}</div>
         <h3 className="text-3xl font-bold group-hover:text-blue-100">{heading}</h3>
-        <p className="text-base font-light">{body}</p>
-        <p className="flex text-gray-400">
+        <p className="text-lg font-light">{body}</p>
+        <p className="text-base text-gray-500">
           {date &&
             `${new Date(date).toLocaleDateString('en-US', {
               month: 'long',

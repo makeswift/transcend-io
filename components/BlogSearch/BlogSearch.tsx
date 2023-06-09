@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { Ref, forwardRef, useMemo, useState } from 'react'
 
 import { Combobox } from '@headlessui/react'
-import clsx from 'clsx'
 import debounce from 'lodash.debounce'
 import useSWR from 'swr'
 

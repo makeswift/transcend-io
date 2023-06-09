@@ -30,7 +30,7 @@ export const Tabs = forwardRef(function Tabs(
             {tabs?.map((tab, index) => (
               <RadixTabs.Trigger
                 key={index}
-                className="text-md flex h-10 select-none items-center justify-center bg-gray-900 px-4 leading-none text-gray-400 outline-none data-[state=active]:bg-black data-[state=active]:text-white"
+                className="text-md flex h-10 select-none items-center justify-center bg-gray-700 px-4 leading-none text-gray-400 outline-none data-[state=active]:bg-black data-[state=active]:text-white"
                 value={index.toString()}
               >
                 {tab.title}

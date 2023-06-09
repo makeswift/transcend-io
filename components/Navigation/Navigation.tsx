@@ -110,8 +110,8 @@ export function Navigation({
         <nav
           className={clsx(
             'mx-auto flex h-[70px] w-full max-w-[1296px] items-center justify-between px-5 md:px-8 lg:justify-start lg:px-12',
-            darkMode ? 'text-white' : 'text-gray-900',
-            sticky && '!text-gray-900',
+            darkMode ? 'text-white' : 'text-gray-700',
+            sticky && '!text-gray-700',
           )}
         >
           <Link href={logoLink?.href ?? '#'} target={logoLink?.target}>
@@ -177,7 +177,7 @@ export function Navigation({
 
                   <NavigationMenu.Content className="absolute -left-16 top-full flex w-full origin-top animate-fadeIn overflow-hidden rounded-xl bg-white shadow-md sm:w-auto">
                     {mainLink.subnavGroups?.map((subnavGroup, i) => (
-                      <ul key={i} className="w-72 border-r border-gray-100">
+                      <ul key={i} className="w-60 border-r border-gray-100">
                         <li className="px-6 pb-2 pt-6 text-xxs font-bold uppercase tracking-widest text-gray-700">
                           {subnavGroup.heading}
                         </li>
@@ -204,7 +204,7 @@ export function Navigation({
                                   </p>
 
                                   {subnavLink.subtext && (
-                                    <p className="leading-normal text-gray-400 group-hover:text-blue-100">
+                                    <p className="text-sm leading-normal text-gray-400 group-hover:text-blue-100">
                                       {subnavLink.subtext}
                                     </p>
                                   )}
@@ -251,7 +251,7 @@ export function Navigation({
 
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className={clsx('block w-7 lg:hidden', sticky ? 'text-gray-900' : 'text-white')}
+            className={clsx('block w-7 lg:hidden', sticky ? 'text-gray-700' : 'text-white')}
           >
             <svg
               viewBox="0 0 26 24"

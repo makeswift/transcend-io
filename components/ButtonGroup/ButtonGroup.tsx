@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, MouseEvent, Ref, forwardRef } from 'react'
+import React, { ComponentPropsWithoutRef, Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
@@ -17,9 +17,6 @@ export const ButtonGroup = forwardRef(function ButtonGroup(
   { className, buttons, alignment = 'left', buttonGap = 20 }: ButtonGroupProps,
   ref: Ref<HTMLDivElement>,
 ) {
-  if (buttons.length === 0)
-    return <p className={clsx(className, 'text-center')}>There are no buttons</p>
-
   return (
     <div
       className={clsx(
@@ -34,13 +31,17 @@ export const ButtonGroup = forwardRef(function ButtonGroup(
       ref={ref}
       style={{ gap: buttonGap }}
     >
-      {buttons?.map((button, i) => {
-        return (
-          <LinkButton key={i} {...button} className="w-full sm:w-auto [&>button]:w-full">
-            {button.children}
-          </LinkButton>
-        )
-      })}
+      {buttons.length === 0 ? (
+        <p className="text w-full py-4 text-center text-gray-700">There are no buttons</p>
+      ) : (
+        buttons.map((button, i) => {
+          return (
+            <LinkButton key={i} {...button} className="w-full sm:w-auto [&>button]:w-full">
+              {button.children}
+            </LinkButton>
+          )
+        })
+      )}
     </div>
   )
 })

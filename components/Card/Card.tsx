@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { MouseEvent, Ref, forwardRef } from 'react'
+import React, { Ref, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
@@ -14,11 +14,10 @@ type Props = {
   }
   title?: string
   text?: string
-  bgColor?: string
 }
 
 export const Card = forwardRef(function Card(
-  { className, imageSrc, imageAlt, link, title, text, bgColor }: Props,
+  { className, imageSrc, imageAlt, link, title, text }: Props,
   ref: Ref<HTMLAnchorElement>,
 ) {
   return (
@@ -28,7 +27,7 @@ export const Card = forwardRef(function Card(
       target={link?.target}
       className={clsx(
         className,
-        'flex w-full flex-col self-stretch overflow-hidden rounded-xl border border-gray-200 bg-white text-gray-900 transition-shadow hover:shadow-xl hover:shadow-black/5',
+        'flex w-full flex-col self-stretch overflow-hidden rounded-xl border border-gray-200 bg-white text-gray-700 transition-shadow hover:shadow-xl hover:shadow-black/5',
       )}
     >
       {imageSrc && (

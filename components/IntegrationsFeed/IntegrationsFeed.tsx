@@ -43,13 +43,13 @@ export const IntegrationsFeed = forwardRef(function IntegrationsFeed(
 
   return (
     <div className={clsx(className, 'space-y-12')} ref={ref}>
-      <div className="flex flex-wrap items-stretch justify-evenly gap-12">
+      <div className="grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-8 lg:grid-cols-4 lg:gap-10">
         {items
           .filter(item => item.fields.integrationStatus === 'ONLINE')
           .map(item => (
             <Link
               key={item.sys.id}
-              className="flex min-h-[150px] w-[315px] cursor-pointer flex-col items-center gap-4 rounded-lg border border-gray-200 px-9 py-12 text-center hover:border-blue-100"
+              className="flex min-h-[150px] w-full cursor-pointer flex-col items-center gap-4 rounded-xl border border-gray-200 px-5 py-8 text-center hover:border-blue-100 md:px-8 md:py-10"
               href={`/integrations#`}
             >
               {item.fields.logoSquare && (
@@ -60,13 +60,11 @@ export const IntegrationsFeed = forwardRef(function IntegrationsFeed(
                   alt={`${item.fields.title} logo`}
                 />
               )}
-              <div className="flex flex-col justify-between gap-4">
-                <div className="space-y-3">
-                  <h3 className="line-clamp-3 text-xl font-bold group-hover:text-blue-100 md:line-clamp-3 lg:line-clamp-2">
-                    {item.fields.title}
-                  </h3>
-                  <p className="text-md leading-tight text-gray-600">{item.fields.description}</p>
-                </div>
+              <div className="space-y-3">
+                <h3 className="text-lg font-bold md:text-xl ">{item.fields.title}</h3>
+                <p className="text-md hidden leading-tight text-gray-600 md:block">
+                  {item.fields.description}
+                </p>
               </div>
             </Link>
           ))}
@@ -74,7 +72,7 @@ export const IntegrationsFeed = forwardRef(function IntegrationsFeed(
       {items.length < total && (
         <div className="flex justify-center">
           <Button
-            variant="outlined"
+            variant="filled"
             onClick={() => {
               if (items.length < total) {
                 setParams(prev => ({ ...prev, skip: prev.skip + prev.limit }))

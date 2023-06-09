@@ -26,7 +26,7 @@ export const BlogCategories = forwardRef(function BlogCategories(
         <Link
           key={category.id}
           href={`/blog${category.path}`}
-          className="rounded-full bg-gray-200 px-4 py-2 text-xs font-bold text-gray-500 ring-1 ring-transparent transition-colors hover:bg-white hover:text-blue-100 hover:ring-gray-200"
+          className="rounded-full bg-gray-200 px-4 py-2 text-xs font-bold text-gray-600 ring-1 ring-transparent transition-colors hover:bg-white hover:text-blue-100 hover:ring-gray-200"
         >
           {category.name}
         </Link>
