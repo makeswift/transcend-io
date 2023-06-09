@@ -18,6 +18,7 @@
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@makeswift/runtime": "^0.9.2",
     "@radix-ui/react-accordion": "^1.1.1",
+    "@radix-ui/react-form": "^0.0.3",
     "@radix-ui/react-navigation-menu": "^1.1.2",
     "@radix-ui/react-tabs": "^1.0.4",
     "clsx": "^1.2.1",
