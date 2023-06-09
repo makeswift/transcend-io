@@ -7,13 +7,12 @@ import { runtime } from '@/lib/makeswift/runtime'
 
 runtime.registerComponent(
   forwardNextDynamicRef(patch =>
-    dynamic(() =>
-      patch(import('./BlogFeaturedPost').then(({ BlogFeaturedPost }) => BlogFeaturedPost)),
-    ),
+    dynamic(() => patch(import('./InlineForm').then(({ InlineForm }) => InlineForm))),
   ),
   {
-    type: 'BlogFeaturedPost',
-    label: 'Blog/Featured Post',
+    type: 'InlineForm',
+    label: 'Inline Form',
+    icon: 'form',
     props: {
       className: Style(),
     },
