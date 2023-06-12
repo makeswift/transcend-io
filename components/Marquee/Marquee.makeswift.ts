@@ -33,7 +33,6 @@ runtime.registerComponent(
           return logo?.logoAlt || 'Untitled'
         },
       }),
-      gap: Number({ label: 'Gap', defaultValue: 96 }),
       duration: Number({
         label: 'Animation duration',
         defaultValue: 20,

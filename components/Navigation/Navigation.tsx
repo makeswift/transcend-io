@@ -251,7 +251,7 @@ export function Navigation({
 
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className={clsx('block w-7 lg:hidden', sticky ? 'text-gray-700' : 'text-white')}
+            className={clsx('block w-7 lg:hidden')}
           >
             <svg
               viewBox="0 0 26 24"
@@ -328,7 +328,7 @@ export function Navigation({
                                   </p>
 
                                   {subnavLink.subtext && (
-                                    <p className="text-sm font-normal leading-normal text-gray-400 group-hover:text-blue-100">
+                                    <p className="text-sm font-normal leading-normal text-gray-600 group-hover:text-blue-100">
                                       {subnavLink.subtext}
                                     </p>
                                   )}

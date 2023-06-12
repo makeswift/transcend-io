@@ -13,7 +13,7 @@ type Props = {
 export const Form = forwardRef(function Form({ className }: Props, ref: Ref<HTMLFormElement>) {
   return (
     <Root ref={ref} className={clsx(className, 'space-y-8')}>
-      <div className="grid grid-cols-12 sm:gap-x-4">
+      <div className="grid grid-cols-12 gap-y-8 sm:gap-x-4">
         <Field className="relative col-span-12 grid sm:col-span-6" name="firstName">
           <div className="flex items-baseline justify-between">
             <Label className="sr-only">First name</Label>

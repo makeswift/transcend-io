@@ -21,11 +21,10 @@ export const BlogTopPosts = forwardRef(function BlogTopPosts(
   const { data } = useSWR(getCacheKey('blog/top-posts'), () => client.request(BlogTopPostsDocument))
 
   return (
-    <div ref={ref} className={clsx(className, 'grid grid-cols-12 gap-x-10')}>
+    <div ref={ref} className={clsx(className, 'grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-3')}>
       {data?.allPosts.map(post => (
         <Post
           key={post.id}
-          className="col-span-4"
           orientation="vertical"
           link={{ href: `/blog${post.slug}` }}
           preHeading={post.specialPick}
