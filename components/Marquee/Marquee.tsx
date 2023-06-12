@@ -11,14 +11,13 @@ type Logo = {
 
 type Props = {
   className?: string
-  gap: number
   logos: Logo[]
   fadeEdges?: boolean
   duration?: number
 }
 
 export const Marquee = forwardRef(function Marquee(
-  { className, gap = 96, logos, fadeEdges = true, duration = 120 }: Props,
+  { className, logos, fadeEdges = true, duration = 120 }: Props,
   ref: Ref<HTMLDivElement>,
 ) {
   if (!logos?.length) {
@@ -30,13 +29,10 @@ export const Marquee = forwardRef(function Marquee(
   }
 
   const marqueeContainer = (
-    <div
-      className="flex min-w-full flex-[0_0_auto] animate-marqueeScroll items-center"
-      style={{ columnGap: gap, paddingLeft: gap / 2, paddingRight: gap / 2 }}
-    >
+    <div className="flex min-w-full flex-[0_0_auto] animate-marqueeScroll items-center gap-x-12 px-6 md:gap-x-24 md:px-12">
       {logos.map((logo, index) => {
         if (logo.logoImage == null)
-          return <div key={index} className="h-10 w-10 rounded-full bg-gray-300" />
+          return <div key={index} className="h-12 w-12 rounded-full bg-gray-300" />
 
         return (
           <Image
