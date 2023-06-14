@@ -46,7 +46,7 @@ export type ActionCardRecord = RecordInterface & {
   subtitle?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
-  url: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -151,12 +151,12 @@ export type AuthorRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  avatar: FileField;
+  avatar?: Maybe<FileField>;
   bio?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   featured?: Maybe<Scalars['BooleanType']['output']>;
   id: Scalars['ItemId']['output'];
-  name: Scalars['String']['output'];
+  name?: Maybe<Scalars['String']['output']>;
   social: Array<TextBlockRecord>;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -186,9 +186,9 @@ export type BadgesBlockRecord = RecordInterface & {
   badges: Array<FileField>;
   createdAt: Scalars['DateTime']['output'];
   cta?: Maybe<ButtonRecord>;
-  description: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -877,8 +877,8 @@ export type CategoryRecord = RecordInterface & {
   heading?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   isresetbutton?: Maybe<Scalars['BooleanType']['output']>;
-  name: Scalars['String']['output'];
-  path: Scalars['String']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
   subheading?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -1036,11 +1036,11 @@ export type CodeSnippetRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  code: Scalars['String']['output'];
+  code?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   snippetDescription?: Maybe<Scalars['String']['output']>;
-  snippetLabel: Scalars['String']['output'];
+  snippetLabel?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -1152,7 +1152,7 @@ export type ContactContentBlockRecord = RecordInterface & {
   description?: Maybe<Scalars['String']['output']>;
   enablePopupText?: Maybe<Scalars['BooleanType']['output']>;
   enablePopupWidget?: Maybe<Scalars['BooleanType']['output']>;
-  form: FormLargeRecord;
+  form?: Maybe<FormLargeRecord>;
   id: Scalars['ItemId']['output'];
   logoWall: Array<FileField>;
   logoWallCaption?: Maybe<Scalars['String']['output']>;
@@ -1196,27 +1196,27 @@ export type ContactFormRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   autofocus?: Maybe<Scalars['BooleanType']['output']>;
-  buttonSuccessMessage: Scalars['String']['output'];
-  company: Scalars['String']['output'];
+  buttonSuccessMessage?: Maybe<Scalars['String']['output']>;
+  company?: Maybe<Scalars['String']['output']>;
   consentDisclosure?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   disclosures?: Maybe<Scalars['String']['output']>;
-  email: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  firstName?: Maybe<Scalars['String']['output']>;
   gatherConsent?: Maybe<Scalars['BooleanType']['output']>;
   hasSideContent?: Maybe<Scalars['BooleanType']['output']>;
   id: Scalars['ItemId']['output'];
   isPardot?: Maybe<Scalars['BooleanType']['output']>;
-  lastName: Scalars['String']['output'];
+  lastName?: Maybe<Scalars['String']['output']>;
   message?: Maybe<Scalars['String']['output']>;
-  pardotCampaignId: Scalars['IntType']['output'];
+  pardotCampaignId?: Maybe<Scalars['IntType']['output']>;
   pardotFormAction?: Maybe<Scalars['String']['output']>;
   pardotListIds?: Maybe<Scalars['String']['output']>;
   performsRedirect?: Maybe<Scalars['BooleanType']['output']>;
   phone?: Maybe<Scalars['String']['output']>;
   redirectPath?: Maybe<Scalars['String']['output']>;
   sideContent?: Maybe<Scalars['String']['output']>;
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -1260,7 +1260,7 @@ export type ContentHeadingRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  as: Scalars['String']['output'];
+  as?: Maybe<Scalars['String']['output']>;
   content?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   elementId?: Maybe<Scalars['String']['output']>;
@@ -1329,7 +1329,7 @@ export type DropDownLinksColumnRecord = RecordInterface & {
   columns: Array<ThreeColumnRecord>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -1358,7 +1358,7 @@ export type DropdowncolumnRecord = RecordInterface & {
   columnLinks: Array<LinksColumnRecord>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
-  linkTitle: Scalars['String']['output'];
+  linkTitle?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -1472,6 +1472,8 @@ export type FeaturesGridRecord_SeoMetaTagsArgs = {
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
   author?: Maybe<Scalars['String']['output']>;
@@ -1548,6 +1550,8 @@ export type FileFieldUrlArgs = {
 
 export type FileFieldInterface = {
   _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
   author?: Maybe<Scalars['String']['output']>;
@@ -1893,7 +1897,7 @@ export type FormEmailRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   impliesConsent?: Maybe<Scalars['BooleanType']['output']>;
   isAlignLeft?: Maybe<Scalars['BooleanType']['output']>;
-  pardotCampaignId: Scalars['IntType']['output'];
+  pardotCampaignId?: Maybe<Scalars['IntType']['output']>;
   pardotListIds?: Maybe<Scalars['String']['output']>;
   performsRedirect?: Maybe<Scalars['BooleanType']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
@@ -2055,7 +2059,7 @@ export type FormLargeRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   allowPersonalEmail?: Maybe<Scalars['BooleanType']['output']>;
-  buttonSuccessMessage: Scalars['String']['output'];
+  buttonSuccessMessage?: Maybe<Scalars['String']['output']>;
   company?: Maybe<Scalars['String']['output']>;
   companySize?: Maybe<Scalars['String']['output']>;
   consentDisclosure?: Maybe<Scalars['String']['output']>;
@@ -2073,7 +2077,7 @@ export type FormLargeRecord = RecordInterface & {
   jobTitle?: Maybe<Scalars['String']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   message?: Maybe<Scalars['String']['output']>;
-  pardotCampaignId: Scalars['IntType']['output'];
+  pardotCampaignId?: Maybe<Scalars['IntType']['output']>;
   pardotFormAction?: Maybe<Scalars['String']['output']>;
   pardotListIds?: Maybe<Scalars['String']['output']>;
   performsRedirect?: Maybe<Scalars['BooleanType']['output']>;
@@ -2120,7 +2124,7 @@ export type FullLawContentBlockRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  fullLaw: Scalars['String']['output'];
+  fullLaw?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -2332,7 +2336,7 @@ export type HeaderRecord = RecordInterface & {
   createdAt: Scalars['DateTime']['output'];
   dropdownLinks: Array<HeaderModelDropdownLinksField>;
   id: Scalars['ItemId']['output'];
-  logo: FileField;
+  logo?: Maybe<FileField>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
@@ -2621,7 +2625,7 @@ export type ImageContentBlockRecord = RecordInterface & {
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   image?: Maybe<FileField>;
-  imagePositioning: Scalars['String']['output'];
+  imagePositioning?: Maybe<Scalars['String']['output']>;
   isWide?: Maybe<Scalars['BooleanType']['output']>;
   loopLottieFile?: Maybe<Scalars['BooleanType']['output']>;
   lottieData?: Maybe<FileField>;
@@ -2675,7 +2679,7 @@ export type ImageWith3upsContentBlockRecord = RecordInterface & {
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   image?: Maybe<FileField>;
-  imagePositioning: Scalars['String']['output'];
+  imagePositioning?: Maybe<Scalars['String']['output']>;
   isWide?: Maybe<Scalars['BooleanType']['output']>;
   preTitle?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -4260,7 +4264,7 @@ export type JobsContentBlockRecord = RecordInterface & {
   teamFiltersOrder: Array<TextBlockRecord>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
-  urlLever: Scalars['String']['output'];
+  urlLever?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -4456,7 +4460,7 @@ export type LinksColumnRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   columnLinks: Array<LinkRecord>;
-  columnTitle: Scalars['String']['output'];
+  columnTitle?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -4498,7 +4502,7 @@ export type LinkscolumnRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  columtitle: Scalars['String']['output'];
+  columtitle?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   links: Array<LinkRecord>;
@@ -4854,13 +4858,13 @@ export type PageRecord = RecordInterface & {
   header?: Maybe<HeaderRecord>;
   headerBackground?: Maybe<ColorField>;
   id: Scalars['ItemId']['output'];
-  internalName: Scalars['String']['output'];
+  internalName?: Maybe<Scalars['String']['output']>;
   isHeaderColored?: Maybe<Scalars['BooleanType']['output']>;
   isHeaderTextWhite?: Maybe<Scalars['BooleanType']['output']>;
   isRightSideHeaderWhite?: Maybe<Scalars['BooleanType']['output']>;
   noIndex?: Maybe<Scalars['BooleanType']['output']>;
   pageScriptBody?: Maybe<Scalars['String']['output']>;
-  pathname: Scalars['String']['output'];
+  pathname?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
   title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
@@ -5000,18 +5004,18 @@ export type PostRecord = RecordInterface & {
   category: Array<CategoryRecord>;
   content?: Maybe<PostModelContentField>;
   createdAt: Scalars['DateTime']['output'];
-  date: Scalars['DateTime']['output'];
-  excerpt: Scalars['String']['output'];
+  date?: Maybe<Scalars['DateTime']['output']>;
+  excerpt?: Maybe<Scalars['String']['output']>;
   featured?: Maybe<Scalars['BooleanType']['output']>;
   header?: Maybe<HeaderRecord>;
-  hero: FileField;
+  hero?: Maybe<FileField>;
   hideHero?: Maybe<Scalars['BooleanType']['output']>;
   id: Scalars['ItemId']['output'];
   readTime?: Maybe<Scalars['IntType']['output']>;
   secret?: Maybe<Scalars['BooleanType']['output']>;
-  slug: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
   specialPick?: Maybe<Scalars['String']['output']>;
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -7306,7 +7310,7 @@ export type StoryRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   informationCars: Array<CardRecord>;
   logo?: Maybe<FileField>;
-  pathname: Scalars['String']['output'];
+  pathname?: Maybe<Scalars['String']['output']>;
   position?: Maybe<Scalars['IntType']['output']>;
   results?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
@@ -7530,9 +7534,9 @@ export type TermRecord = RecordInterface & {
   footer?: Maybe<FooterRecord>;
   header?: Maybe<HeaderRecord>;
   id: Scalars['ItemId']['output'];
-  internalName: Scalars['String']['output'];
+  internalName?: Maybe<Scalars['String']['output']>;
   noIndex?: Maybe<Scalars['BooleanType']['output']>;
-  pathname: Scalars['String']['output'];
+  pathname?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
   tableOfContent: Array<AnchorRecord>;
   title?: Maybe<Scalars['String']['output']>;
@@ -7637,11 +7641,11 @@ export type TestimonialSlideRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   logo?: Maybe<FileField>;
   logoBackgroundColour?: Maybe<ColorField>;
-  personName: Scalars['String']['output'];
+  personName?: Maybe<Scalars['String']['output']>;
   quote?: Maybe<Scalars['String']['output']>;
   quoteOnly?: Maybe<Scalars['BooleanType']['output']>;
-  title: Scalars['String']['output'];
-  titleOfPerson: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  titleOfPerson?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -8378,7 +8382,7 @@ export type VideoBlockRecord = RecordInterface & {
   updatedAt: Scalars['DateTime']['output'];
   videoBody?: Maybe<Scalars['String']['output']>;
   videoTitle?: Maybe<Scalars['String']['output']>;
-  videoUrl: Scalars['String']['output'];
+  videoUrl?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -8501,7 +8505,7 @@ export type VideoPopupRecord = RecordInterface & {
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
   name?: Maybe<Scalars['String']['output']>;
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   videoThumbnail?: Maybe<FileField>;
   videoUrl?: Maybe<Scalars['String']['output']>;
@@ -8519,15 +8523,21 @@ export type FocalPoint = {
   y: Scalars['FloatType']['output'];
 };
 
+
+export const BlogCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]} as unknown as DocumentNode<BlogCategoriesQuery, BlogCategoriesQueryVariables>;
+export const BlogFeaturedPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogFeaturedPost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"featured"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogFeaturedPostQuery, BlogFeaturedPostQueryVariables>;
+export const BlogFeedDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogFeed"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IntType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"skip"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IntType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PostModelFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"skip"},"value":{"kind":"Variable","name":{"kind":"Name","value":"skip"}}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"_allPostsMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]} as unknown as DocumentNode<BlogFeedQuery, BlogFeedQueryVariables>;
+export const BlogSearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogSearch"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PostModelFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<BlogSearchQuery, BlogSearchQueryVariables>;
+export const BlogTopPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogTopPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"specialPick"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isBlank"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"specialPick"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogTopPostsQuery, BlogTopPostsQueryVariables>;
 export type BlogCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BlogCategoriesQuery = { __typename?: 'Query', allCategories: Array<{ __typename?: 'CategoryRecord', id: string, name: string, path: string }> };
+export type BlogCategoriesQuery = { __typename?: 'Query', allCategories: Array<{ __typename?: 'CategoryRecord', id: string, name?: string | null, path?: string | null }> };
 
 export type BlogFeaturedPostQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BlogFeaturedPostQuery = { __typename?: 'Query', post?: { __typename?: 'PostRecord', id: string, title: string, slug: string, readTime?: number | null, excerpt: string, _publishedAt?: string | null, hero: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } } | null };
+export type BlogFeaturedPostQuery = { __typename?: 'Query', post?: { __typename?: 'PostRecord', id: string, title?: string | null, slug?: string | null, readTime?: number | null, excerpt?: string | null, _publishedAt?: string | null, hero?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null } | null };
 
 export type BlogFeedQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['IntType']['input']>;
@@ -8536,23 +8546,16 @@ export type BlogFeedQueryVariables = Exact<{
 }>;
 
 
-export type BlogFeedQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title: string, slug: string, readTime?: number | null, excerpt: string, _publishedAt?: string | null, hero: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }>, _allPostsMeta: { __typename?: 'CollectionMetadata', count: number } };
+export type BlogFeedQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title?: string | null, slug?: string | null, readTime?: number | null, excerpt?: string | null, _publishedAt?: string | null, hero?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null }>, _allPostsMeta: { __typename?: 'CollectionMetadata', count: number } };
 
 export type BlogSearchQueryVariables = Exact<{
   filter?: InputMaybe<PostModelFilter>;
 }>;
 
 
-export type BlogSearchQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title: string, slug: string }> };
+export type BlogSearchQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title?: string | null, slug?: string | null }> };
 
 export type BlogTopPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type BlogTopPostsQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title: string, slug: string, readTime?: number | null, excerpt: string, specialPick?: string | null, _publishedAt?: string | null, hero: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
-
-
-export const BlogCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allCategories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]} as unknown as DocumentNode<BlogCategoriesQuery, BlogCategoriesQueryVariables>;
-export const BlogFeaturedPostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogFeaturedPost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"featured"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogFeaturedPostQuery, BlogFeaturedPostQueryVariables>;
-export const BlogFeedDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogFeed"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IntType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"skip"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"IntType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PostModelFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"skip"},"value":{"kind":"Variable","name":{"kind":"Name","value":"skip"}}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"_allPostsMeta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]} as unknown as DocumentNode<BlogFeedQuery, BlogFeedQueryVariables>;
-export const BlogSearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogSearch"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PostModelFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<BlogSearchQuery, BlogSearchQueryVariables>;
-export const BlogTopPostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogTopPosts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPosts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"3"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"specialPick"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"isBlank"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"readTime"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"specialPick"}},{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}},{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"IntValue","value":"300"}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sizes"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogTopPostsQuery, BlogTopPostsQueryVariables>;
+export type BlogTopPostsQuery = { __typename?: 'Query', allPosts: Array<{ __typename?: 'PostRecord', id: string, title?: string | null, slug?: string | null, readTime?: number | null, excerpt?: string | null, specialPick?: string | null, _publishedAt?: string | null, hero?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null }> };
