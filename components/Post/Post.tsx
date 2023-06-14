@@ -9,8 +9,8 @@ type Props = {
   orientation?: 'horizontal' | 'vertical'
   slug?: string
   preHeading?: string | null
-  heading?: string
-  body?: string
+  heading?: string | null
+  body?: string | null
   date?: string | null
   readTime?: number | null
   image?: React.ReactNode

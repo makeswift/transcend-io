@@ -52,7 +52,7 @@ export const BlogFeed = forwardRef(function BlogFeed(
             href={`/blog${post.slug}`}
           >
             <div className="relative h-[200px] w-full shrink-0 sm:h-[150px] sm:w-[200px] lg:h-[150px] lg:w-[250px] xl:h-[200px] xl:w-[300px]">
-              {post.hero.responsiveImage && (
+              {post.hero?.responsiveImage && (
                 <Image data={post.hero.responsiveImage} layout="fill" objectFit="cover" />
               )}
             </div>

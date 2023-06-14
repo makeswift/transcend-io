@@ -8,7 +8,7 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "codegen-icons": "npx @svgr/cli --typescript --replace-attr-values \"#000=currentColor\" --out-dir generated/icons -- public/icons",
     "codegen-ts-contentful": "contentful-typescript-codegen --output generated/contentful.d.ts",
-    "codegen-ts-dato": "graphql-codegen --config graphql.config.yml --watch"
+    "codegen-ts-dato": "graphql-codegen --config graphql.config.ts --watch"
   },
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^16.0.3",
@@ -17,6 +17,7 @@
     "@headlessui/react": "^1.7.15",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@makeswift/runtime": "^0.9.2",
+    "@next/env": "^13.4.5",
     "@radix-ui/react-accordion": "^1.1.1",
     "@radix-ui/react-form": "^0.0.3",
     "@radix-ui/react-navigation-menu": "^1.1.2",

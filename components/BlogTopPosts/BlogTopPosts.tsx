@@ -33,7 +33,7 @@ export const BlogTopPosts = forwardRef(function BlogTopPosts(
           date={post._publishedAt}
           readTime={post.readTime}
           image={
-            post.hero.responsiveImage && (
+            post.hero?.responsiveImage && (
               <Image data={post.hero.responsiveImage} layout="fill" objectFit="cover" />
             )
           }

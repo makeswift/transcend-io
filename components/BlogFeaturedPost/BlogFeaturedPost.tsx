@@ -31,7 +31,7 @@ export const BlogFeaturedPost = forwardRef(function BlogFeaturedPost(
       date={data?.post?._publishedAt}
       readTime={data?.post?.readTime}
       image={
-        data?.post?.hero.responsiveImage && (
+        data?.post?.hero?.responsiveImage && (
           <Image data={data.post.hero.responsiveImage} layout="fill" objectFit="cover" />
         )
       }
