@@ -5,17 +5,33 @@ import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { submitLead } from '@/lib/pardot/submit'
 
 type Props = {
   className?: string
+  pardotCampaignId?: string
+  pardotListIds?: string
 }
 
 export const InlineForm = forwardRef(function InlineForm(
-  { className }: Props,
+  { className, pardotCampaignId = '10501', pardotListIds = '7579' }: Props,
   ref: Ref<HTMLFormElement>,
 ) {
   return (
-    <Root ref={ref} className={clsx(className, 'space-y-8')}>
+    <Root
+      ref={ref}
+      className={clsx(className, 'space-y-8')}
+      onSubmit={async e => {
+        const email = e.currentTarget.elements.namedItem('email')
+
+        await submitLead({
+          email: email instanceof HTMLInputElement ? email.value : '',
+          consent: true,
+          pardotCampaignId,
+          pardotListIds,
+        })
+      }}
+    >
       <div className="relative">
         <Field className="relative grid" name="email">
           <Label className="sr-only">Email</Label>

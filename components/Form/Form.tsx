@@ -5,14 +5,39 @@ import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { submitLead } from '@/lib/pardot/submit'
 
 type Props = {
   className?: string
+  pardotCampaignId?: string
+  pardotListIds?: string
 }
 
-export const Form = forwardRef(function Form({ className }: Props, ref: Ref<HTMLFormElement>) {
+export const Form = forwardRef(function Form(
+  { className, pardotCampaignId = '10501', pardotListIds = '7579' }: Props,
+  ref: Ref<HTMLFormElement>,
+) {
   return (
-    <Root ref={ref} className={clsx(className, 'space-y-8')}>
+    <Root
+      ref={ref}
+      className={clsx(className, 'space-y-8')}
+      onSubmit={async e => {
+        const firstName = e.currentTarget.elements.namedItem('firstName')
+        const lastName = e.currentTarget.elements.namedItem('lastName')
+        const email = e.currentTarget.elements.namedItem('email')
+        const company = e.currentTarget.elements.namedItem('company')
+
+        await submitLead({
+          firstName: firstName instanceof HTMLInputElement ? firstName.value : undefined,
+          lastName: lastName instanceof HTMLInputElement ? lastName.value : undefined,
+          email: email instanceof HTMLInputElement ? email.value : '',
+          company: company instanceof HTMLInputElement ? company.value : undefined,
+          consent: true,
+          pardotCampaignId,
+          pardotListIds,
+        })
+      }}
+    >
       <div className="grid grid-cols-12 gap-y-8 sm:gap-x-4">
         <Field className="relative col-span-12 grid sm:col-span-6" name="firstName">
           <div className="flex items-baseline justify-between">
