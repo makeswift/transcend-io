@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import { ComponentPropsWithoutRef, ReactNode, Ref, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ReactNode, Ref, forwardRef, use, useEffect, useRef } from 'react'
 
 import clsx from 'clsx'
 
 import { ChevronRight } from '@/generated/icons'
+import { analytics } from '@/lib/segment/analytics'
 
 const SIZE_STYLES = {
   medium: 'px-5 py-2.5',
@@ -65,15 +66,21 @@ export const Button = forwardRef(function Button(
 
 type BaseLinkButtonProps = {
   link?: { href: string; target?: '_self' | '_blank' }
+  eventName?: string
 } & Props
 
-export const LinkButton = forwardRef(function LinkButton(
-  { link, className, ...rest }: BaseLinkButtonProps,
-  ref: Ref<HTMLAnchorElement>,
-) {
+export function LinkButton({ link, className, eventName, ...rest }: BaseLinkButtonProps) {
+  const ref = useRef<HTMLAnchorElement>(null)
+
+  useEffect(() => {
+    if (!eventName || !ref.current) return
+
+    analytics.trackLink(ref.current, eventName)
+  }, [eventName])
+
   return (
     <Link ref={ref} className={className} href={link?.href ?? '#'} target={link?.target}>
       <Button {...rest} />
     </Link>
   )
-})
+}
