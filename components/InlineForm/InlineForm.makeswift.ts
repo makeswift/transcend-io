@@ -17,6 +17,7 @@ runtime.registerComponent(
       className: Style(),
       pardotCampaignId: TextInput({ label: 'Pardot campaign ID', defaultValue: '10501' }),
       pardotListIds: TextInput({ label: 'Pardot list IDs', defaultValue: '7579' }),
+      eventName: TextInput({ label: 'Event name', defaultValue: 'Form Submitted' }),
     },
   },
 )
