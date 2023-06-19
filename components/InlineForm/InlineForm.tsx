@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Ref, forwardRef } from 'react'
+import { Ref, forwardRef, useState } from 'react'
 
 import { Control, Field, Label, Message, Root, Submit } from '@radix-ui/react-form'
 import clsx from 'clsx'
@@ -28,28 +28,45 @@ export const InlineForm = forwardRef(function InlineForm(
   const {
     query: { utm_source, utm_medium, utm_campaign, utm_id, utm_term, utm_content },
   } = useRouter()
+  const [loading, setLoading] = useState(false)
 
   return (
     <Root
       ref={ref}
       className={clsx(className, 'space-y-8')}
       onSubmit={async e => {
+        e.preventDefault()
+
         const email = e.currentTarget.elements.namedItem('email')
 
         analytics.track(eventName)
 
-        await submitLead({
-          email: email instanceof HTMLInputElement ? email.value : '',
-          consent: true,
-          pardotCampaignId,
-          pardotListIds,
-          utm_source: typeof utm_source === 'string' ? utm_source : undefined,
-          utm_medium: typeof utm_medium === 'string' ? utm_medium : undefined,
-          utm_campaign: typeof utm_campaign === 'string' ? utm_campaign : undefined,
-          utm_id: typeof utm_id === 'string' ? utm_id : undefined,
-          utm_term: typeof utm_term === 'string' ? utm_term : undefined,
-          utm_content: typeof utm_content === 'string' ? utm_content : undefined,
-        })
+        setLoading(true)
+
+        try {
+          await submitLead({
+            email: email instanceof HTMLInputElement ? email.value : '',
+            consent: true,
+            pardotCampaignId,
+            pardotListIds,
+            utm_source: typeof utm_source === 'string' ? utm_source : undefined,
+            utm_medium: typeof utm_medium === 'string' ? utm_medium : undefined,
+            utm_campaign: typeof utm_campaign === 'string' ? utm_campaign : undefined,
+            utm_id: typeof utm_id === 'string' ? utm_id : undefined,
+            utm_term: typeof utm_term === 'string' ? utm_term : undefined,
+            utm_content: typeof utm_content === 'string' ? utm_content : undefined,
+          })
+
+          if (e.target instanceof HTMLFormElement) {
+            e.target.reset()
+
+            // TODO: Send success growler
+          }
+        } catch (err) {
+          console.error(err)
+        } finally {
+          setLoading(false)
+        }
       }}
     >
       <div className="relative">
@@ -72,7 +89,9 @@ export const InlineForm = forwardRef(function InlineForm(
           </Control>
         </Field>
         <Submit asChild>
-          <Button className="absolute right-0 top-1/2 -translate-y-1/2">Submit</Button>
+          <Button className="absolute right-0 top-1/2 -translate-y-1/2" disabled={loading}>
+            {loading ? 'Loading...' : 'Submit'}
+          </Button>
         </Submit>
       </div>
     </Root>
